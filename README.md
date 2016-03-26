@@ -1,21 +1,31 @@
 Hackathon for Hunger Backend
 
 ## Getting Started
+
+### Installing
 Start with running
 ```
 bundle install
 ```
 Followed by
 ```
-rails s
+rake db:migrate
+rake db:seed
 ```
-to get the server running
+to setup the database schema and provide the app with seed data.
 
-### Installing
-TBD
+The default username and password is:
+* __User__: admin@example.com
+* __Password__: password
 
 ## Deployment
-TBD
+Will be deployed to heroku.  The gemfile include pg and the needed heroku dependencies.  Push to heroku and run
+```
+heroku run rake db:migrate
+```
+in order to setup the database.
+
+If processes are needed, they will need to be setup in the Procfile.
 
 ## Built With
 Ruby on Rails
