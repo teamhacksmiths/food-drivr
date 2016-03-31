@@ -1,44 +1,24 @@
-Hackathon for Hunger Backend
+## README
 
-## Getting Started
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-### Installing
-Start with running
-```
-bundle install
-```
-Followed by
-```
-rake db:migrate
-rake db:seed
-```
-to setup the database schema and provide the app with seed data.
+Things you may want to cover:
 
-The default username and password is:
-* __User__: admin@example.com
-* __Password__: password
+* Ruby version
 
-## Deployment
-Will be deployed to heroku.  The gemfile include pg and the needed heroku dependencies.  Push to heroku and run
-```
-heroku run rake db:migrate
-```
-in order to setup the database.
+* System dependencies
 
-If processes are needed, they will need to be setup in the Procfile.
+* Configuration
 
-## Built With
-Ruby on Rails
+* Database creation
 
-## Authors
+* Database initialization
 
-* **Ryan Collins**
-* **David Harris**
-* **Peter James Bernante**
-* **Kevin Windisch**
-## License
+* How to run the test suite
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.  Anyone anywhere can feel free to clone this repo to use for the purposes of streamlining their food donations.
+* Services (job queues, cache servers, search engines, etc.)
 
-## Acknowledgments
-Thanks to all the wonderful participants!
+* Deployment instructions
+
+* ...
