@@ -25,6 +25,7 @@ open "http://$(docker-machine ip default):3000"
 You will need to periodically run
 ```
 docker-compose run app rake db:migrate
+docker-compose run app rake rake db:seed
 ```
 When new features have been added.
 
