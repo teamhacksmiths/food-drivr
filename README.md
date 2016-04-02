@@ -34,6 +34,9 @@ using default credentials of
 User: admin@example.com
 Password: password
 
+Documentation for active admin can be found [at the following link]
+(https://github.com/activeadmin/activeadmin/blob/master/docs/0-installation.md)
+
 Take a [look at these instructions](http://blog.codeship.com/running-rails-development-environment-docker/) for getting a development environment setup.  
 
 ### Manual Installation
