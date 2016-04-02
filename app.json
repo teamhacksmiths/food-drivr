@@ -1,0 +1,8 @@
+{
+  "name": "Waste Not Food Taxi",
+  "description": "App.json heroku-docker",
+  "image": "heroku/ruby",
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
