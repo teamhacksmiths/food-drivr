@@ -7,15 +7,22 @@ This app was setup using the heroku docker box.  The build process is automated 
 
 Install the Docker toolbox and then run
 ```
-docker-compose up web
+docker-compose up
 ```
+
+To create and migrate the database, run
+```
+docker-compose run app rake db:create
+docker-compose run app rake db:migrate
+```
+which effectively runs these commands within the app container.
 
 To open the running app, run
 ```
-open "http://$(docker-machine ip default):8080"
+open "http://$(docker-machine ip default):3000"
 ```
 
-Take a [look at these instructions](https://blog.codeship.com/deploying-docker-rails-app/) if you have any issues.
+Take a [look at these instructions](http://blog.codeship.com/running-rails-development-environment-docker/) for getting a development environment setup.  
 
 ### Manual Installation
 Manual installation can be done as follows
@@ -33,9 +40,7 @@ rake db:migrate
 to setup the database schema.  
 
 ## Deployment
-
-
-If processes are needed, they will need to be setup in the Procfile.
+The app will be deployed to Heroku.  Instructions for doing so can be found [at this link] (https://blog.codeship.com/deploying-docker-rails-app/).
 
 ## Built With
 Ruby on Rails
