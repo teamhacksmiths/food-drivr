@@ -3,6 +3,7 @@ class CreateDonations < ActiveRecord::Migration
     create_table :donations do |t|
 
       t.timestamps null: false
+
     end
   end
 end
