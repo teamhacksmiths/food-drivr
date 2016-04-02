@@ -22,6 +22,17 @@ To open the running app, run
 open "http://$(docker-machine ip default):3000"
 ```
 
+You will need to periodically run
+```
+docker-compose run app rake db:migrate
+```
+When new features have been added.
+
+Admin interface is viewable from /admin
+using default credentials of
+User: admin@example.com
+Password: password
+
 Take a [look at these instructions](http://blog.codeship.com/running-rails-development-environment-docker/) for getting a development environment setup.  
 
 ### Manual Installation
