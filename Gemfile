@@ -28,7 +28,9 @@ gem 'active_model_serializers'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
+  gem "rspec-rails"
+  gem "factory_girl_rails"
+  gem 'ffaker'
 end
 
 group :development do
@@ -40,11 +42,6 @@ group :development do
   gem 'spring'
 end
 
-group :test do
-  gem "rspec-rails"
-  gem "factory_girl_rails"
-  gem 'ffaker'
-end
 
 group :production do
   gem 'rails_12factor', '0.0.2'
