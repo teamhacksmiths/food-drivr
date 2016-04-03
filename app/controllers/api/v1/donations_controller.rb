@@ -1,17 +1,17 @@
 class DonationsController < BaseApiController
-  before_filter :find_donation, only [:show, :update]
+  before_filter :find_donation, only: [:show, :update]
 
   before_filter only: :create do
-    unless @json.has_key?('donation') && @json['donation'].responds_to(:[])
-                                      && @json['donation']['id']
-      render nothing: true :bad_request
+    unless @json.has_key?('donation') && @json['donation'].responds_to(:[]) && @json['donation']['id']
+
+      render nothing: true, status: :bad_request
     end
   end
 
   # Check that the request has a donation object.
   before_filter only: :update do
     unless @json.has_key?('donation')
-      render nothing: true, status :bad_request
+      render nothing: true, status: :bad_request
     end
   end
 
@@ -36,7 +36,7 @@ class DonationsController < BaseApiController
     if @donation.save
       render json: @donation
     else
-      render nothing: true, status :bad_request
+      render nothing: true, status: :bad_request
     end
   end
 
@@ -45,7 +45,7 @@ class DonationsController < BaseApiController
   def find_donation
     @donation = find_by_id(params[:id])
     unless @donation.present? && @donation.user = @user
-      render nothing: true status: :not_found
+      render nothing: true, status: :not_found
     end
   end
 
