@@ -13,6 +13,7 @@ class Donation < ActiveRecord::Base
     donation_status.name if donation_status
   end
 
+  private
   # Set the default status when a donation is created.
   def default_status
     self.status_id ||= 0

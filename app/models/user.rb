@@ -5,5 +5,11 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  has_many :donations
+  has_many :donations, foreign_key: "donor_id", class_name: "Donation"
+  # Make sure to access with the
+  belongs_to :role
+
+  def role
+    self.role.name
+  end
 end
