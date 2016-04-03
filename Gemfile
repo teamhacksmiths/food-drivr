@@ -21,6 +21,7 @@ gem 'draper'
 gem 'pundit'
 # Gemfile in Rails >= 3.1
 gem 'activeadmin', github: 'activeadmin'
+gem 'shoulda-matchers'
 
 # API Serialization
 gem 'active_model_serializers'

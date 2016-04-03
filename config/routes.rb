@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     # TODO: enforce namespace / versioning: constraints: ApiConstraints.new(version: 1, default: true)
     namespace :v1 do
-      resources :donations
       resources :users, :only => [:show, :create, :update, :destroy]
+      resources :donations, :only => [:show]
     end
   end
 end
