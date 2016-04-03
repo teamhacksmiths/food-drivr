@@ -1,4 +1,4 @@
-class DonationsController < BaseApiController
+class DonationsController < ApplicationController
   before_filter :find_donation, only: [:show, :update]
 
   before_filter only: :create do
