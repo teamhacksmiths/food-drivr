@@ -13,7 +13,4 @@ class User < ActiveRecord::Base
   # Make sure to access with the
   belongs_to :role
 
-  def role
-    self.role.description
-  end
 end
