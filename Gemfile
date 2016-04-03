@@ -31,11 +31,9 @@ gem 'draper'
 gem 'pundit'
 # Gemfile in Rails >= 3.1
 gem 'activeadmin', github: 'activeadmin'
-# Use Unicorn as the app server
-# gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# API Serialization 
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
