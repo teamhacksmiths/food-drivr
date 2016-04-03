@@ -2,8 +2,10 @@ class Donation < ActiveRecord::Base
   before_save :default_status
 
   belongs_to :donor, :class_name => "User", :foreign_key => "donor_id"
-  has_one :driver, :class_name => "User", :foreign_key => "driver_id"
-  has_one :recipient, :class_name => "Recipient", :foreign_key => "recipient_id"
+  belongs_to :driver, :class_name => "User", :foreign_key => "driver_id"
+  belongs_to :recipient
+
+  has_one :donation_meta
 
   belongs_to :donation_status, :class_name => "DonationStatus", :foreign_key => "status_id"
 

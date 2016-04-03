@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402234802) do
+ActiveRecord::Schema.define(version: 20160403013326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,30 @@ ActiveRecord::Schema.define(version: 20160402234802) do
     t.integer  "status_id"
   end
 
+  create_table "dropoffs", force: :cascade do |t|
+    t.datetime "estimated"
+    t.datetime "actual"
+    t.decimal  "latitude",    precision: 15, scale: 10, default: 0.0
+    t.decimal  "longitude",   precision: 15, scale: 10, default: 0.0
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.integer  "donation_id"
+  end
+
+  add_index "dropoffs", ["donation_id"], name: "index_dropoffs_on_donation_id", using: :btree
+
+  create_table "pickups", force: :cascade do |t|
+    t.datetime "estimated"
+    t.datetime "actual"
+    t.decimal  "latitude",    precision: 15, scale: 10, default: 0.0
+    t.decimal  "longitude",   precision: 15, scale: 10, default: 0.0
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.integer  "donation_id"
+  end
+
+  add_index "pickups", ["donation_id"], name: "index_pickups_on_donation_id", using: :btree
+
   create_table "recipients", force: :cascade do |t|
     t.string   "name"
     t.string   "street_address"
@@ -92,4 +116,6 @@ ActiveRecord::Schema.define(version: 20160402234802) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "dropoffs", "donations"
+  add_foreign_key "pickups", "donations"
 end
