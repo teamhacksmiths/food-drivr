@@ -5,7 +5,7 @@ class Donation < ActiveRecord::Base
   belongs_to :driver, :class_name => "User", :foreign_key => "driver_id"
   belongs_to :recipient
 
-  has_one :donation_meta
+  has_one :donation_metum
 
   belongs_to :donation_status
 
