@@ -24,9 +24,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'pg'
 
-# Rails lookup makes lookup tables a synch
-gem 'rails_lookup'
-
 # active admin dependencies
 gem 'devise'
 gem 'cancan' # or cancancan
