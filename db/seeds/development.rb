@@ -33,6 +33,7 @@ User.create!(name: 'Other User',
              phone: '+1 123 456 789',
              role_id: 2)
 
+# More dummy users
 100.times do |n|
   User.create!(name: FFaker::Name.name,
                email: FFaker::Internet.email,
@@ -42,4 +43,13 @@ User.create!(name: 'Other User',
                expiration: Time.now + 20.years,
                phone: FFaker::PhoneNumber.phone_number,
                role_id: [*0..2].sample)
+end
+
+# Dummy recipients
+100.times do |n|
+  Recipient.create!(name: FFaker::Company.name,
+                    street_address: FFaker::AddressUS.street_address,
+                    street_address_two: FFaker::AddressUS.secondary_address,
+                    city: FFaker::AddressUS.city,
+                    zip_code: FFaker::AddressUS.zip_code.split('-')[0].to_i )
 end
