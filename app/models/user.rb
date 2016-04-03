@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   before_create :generate_authentication_token!
-  
+
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_many :donations, foreign_key: "donor_id", class_name: "Donation"
 
-  # Make sure to access with the
+  # Make sure to access with the role.description
   belongs_to :role
 
   def role
