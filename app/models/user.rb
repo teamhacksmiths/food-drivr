@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
   belongs_to :role
 
   def role
-    self.role.name
+    self.role.description
   end
 end
