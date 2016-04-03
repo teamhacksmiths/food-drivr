@@ -53,3 +53,17 @@ end
                     city: FFaker::AddressUS.city,
                     zip_code: FFaker::AddressUS.zip_code.split('-')[0].to_i )
 end
+
+
+# Dummy donations
+donors = User.where(role_id: 0)
+drivers = User.where(role_id: 1)
+recipients = Recipient.all
+statuses = DonationStatus.all
+
+100.times do |n|
+  Donation.create!(donor: donors.sample,
+                   driver: drivers.sample,
+                   recipient: recipients.sample,
+                   status: statuses.sample)
+end
