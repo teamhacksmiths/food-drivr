@@ -1,4 +1,6 @@
 class Donation < ActiveRecord::Base
+  # TODO: add validations for donations
+  # validates :
   before_save :default_status
 
   belongs_to :donor, :class_name => "User", :foreign_key => "donor_id"

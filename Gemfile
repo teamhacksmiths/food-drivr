@@ -31,12 +31,14 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem 'ffaker'
-  gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
-  gem 'compass-rails'
-  gem 'furatto'
-  gem 'font-awesome-rails'
-  gem 'simple_form'
 end
+
+# Sabisu_rails is for API testing
+gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
+gem 'compass-rails'
+gem 'furatto'
+gem 'font-awesome-rails'
+gem 'simple_form'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
