@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_many :donations, foreign_key: "donor_id", class_name: "Donation"
-
+  
   # Access with the def role.
   belongs_to :role
-  
+
   def generate_authentication_token!
     begin
       self.auth_token = Devise.friendly_token

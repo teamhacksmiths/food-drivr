@@ -27,7 +27,7 @@ class Api::V1::DonationsController < ApplicationController
 
   # TODO: add a better mechanism for how the recipient is created.
   def recipient_params
-    params.require(:recipient)
+    params.require(:recipient).permit( :id, :name)
   end
   # before_filter :find_donation, only: [:show, :update]
   #

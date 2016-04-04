@@ -15,14 +15,10 @@ class Donation < ActiveRecord::Base
     donation_status.name if donation_status
   end
 
-  def status=(status)
-    self.status = status
-  end
-
   private
   # Set the default status when a donation is created.
   def default_status
-    self.status = DonationStatus.find(0)
+    self.donation_status = DonationStatus.find(0)
   end
 
 end
