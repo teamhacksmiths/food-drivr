@@ -13,7 +13,7 @@ class Api::V1::DonationsController < ApplicationController
   def create
     donation = current_user.donations.build(donation_params)
     if donation.save
-      render json: product, status: 201, location: [:api, donation]
+      render json: donation, status: 201, location: [:api, donation]
     else
       render json: { errors: donations.errors }, status: 422
     end
