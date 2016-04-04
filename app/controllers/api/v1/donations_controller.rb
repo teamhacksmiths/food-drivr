@@ -9,6 +9,26 @@ class Api::V1::DonationsController < ApplicationController
     respond_with Product.all
   end
 
+  # For creating a new donation:
+  def create
+    donation = current_user.donations.build(donation_params)
+    if donation.save
+      render json: product, status: 201, location: [:api, donation]
+    else
+      render json: { errors: donations.errors }, status: 422
+    end
+  end
+
+  private
+
+  def donation_params
+    params.require(:donation).permit(:recipient, :status_id) #TODO: add params for donations
+  end
+
+  # TODO: add a better mechanism for how the recipient is created.
+  def recipient_params
+    params.require(:recipient)
+  end
   # before_filter :find_donation, only: [:show, :update]
   #
   # before_filter only: :create do
