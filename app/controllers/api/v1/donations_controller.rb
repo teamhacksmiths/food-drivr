@@ -1,4 +1,6 @@
 class Api::V1::DonationsController < ApplicationController
+  before_action :authenticate_with_token!, only: [:create, :update]
+
   respond_to :json
 
   def show
@@ -17,6 +19,21 @@ class Api::V1::DonationsController < ApplicationController
     else
       render json: { errors: donations.errors }, status: 422
     end
+  end
+
+  def update
+    donation = current_user.donations.find(params[:id])
+    if donations.update(donation_params)
+      render json: donation, status: 200, location: [:api, product]
+    else
+      render json: { errors: product.errors }, status: 422
+    end
+  end
+
+  def destroy
+    donation = current_user.donations.find(params[:id])
+    donation.destroy
+    head 204
   end
 
   private
