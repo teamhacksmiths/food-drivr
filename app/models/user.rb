@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   before_create :generate_authentication_token!
+  validates :auth_token, uniqueness: true
+
+  has_one :settings
 
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
@@ -9,7 +12,13 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_many :donations, foreign_key: "donor_id", class_name: "Donation"
 
-  # Make sure to access with the role.description
+  # Has many pickups and dropoffs through donations,
+  # i.e. if they are a driver, they can have many pickups and dropoffs
+
+  has_many :pickups, through: :donations
+  has_many :dropoffs, through: :donations
+
+  # Access with the def role.
   belongs_to :role
 
   def generate_authentication_token!
@@ -17,5 +26,5 @@ class User < ActiveRecord::Base
       self.auth_token = Devise.friendly_token
     end while self.class.exists?(auth_token: auth_token)
   end
-  
+
 end
