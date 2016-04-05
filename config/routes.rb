@@ -1,6 +1,6 @@
 
 Rails.application.routes.draw do
-  #mount SabisuRails::Engine => "/sabisu_rails"
+  mount SabisuRails::Engine => "/sabisu_rails"
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
   ActiveAdmin.routes(self)
