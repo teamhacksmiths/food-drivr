@@ -1,10 +1,14 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :authenticate_with_token!, only: [:update, :destroy]
   respond_to :json
 
+  # Show: send JSON data with user found with ID
   def show
     respond_with User.find(params[:id])
   end
 
+  # Create will create a new user with the passed in Params and
+    # send a 201 if successful, or a 422 if not.
   def create
     user = User.new(user_params)
     if user.save
@@ -14,9 +18,10 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  # Update will update a user with the params passed in.
+  # We need to make sure to safeguard against bad params in the model layer
   def update
-    user = User.find(params[:id])
-
+    user = current_user
     if user.update(user_params)
       render json: user, status: 200, location: [:api, user]
     else
@@ -24,15 +29,17 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  # Delete the current user from the database and send 204
   def destroy
-    user = User.find(params[:id])
-    user.destroy
+    current_user.destroy
     head 204
   end
 
   private
+    # User params accepted at this point for creating a user are:
+      # name, email, password and password_confirmation
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:email, :name, :password, :password_confirmation)
     end
 
 end

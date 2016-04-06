@@ -21,6 +21,7 @@ gem 'draper'
 gem 'pundit'
 # Gemfile in Rails >= 3.1
 gem 'activeadmin', github: 'activeadmin'
+gem 'shoulda-matchers'
 
 # API Serialization
 gem 'active_model_serializers'
@@ -33,6 +34,13 @@ group :development, :test do
   gem 'ffaker'
 end
 
+# Sabisu_rails is for API testing
+gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
+gem 'compass-rails'
+gem 'furatto'
+gem 'font-awesome-rails'
+gem 'simple_form'
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   #gem 'web-console', '~> 2.0'
@@ -41,7 +49,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
 
 group :production do
   gem 'rails_12factor', '0.0.2'

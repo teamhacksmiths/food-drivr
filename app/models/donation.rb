@@ -1,5 +1,7 @@
 class Donation < ActiveRecord::Base
-  before_save :default_status
+
+  after_initialize :set_default_values
+
 
   belongs_to :donor, :class_name => "User", :foreign_key => "donor_id"
   belongs_to :driver, :class_name => "User", :foreign_key => "driver_id"
@@ -7,16 +9,15 @@ class Donation < ActiveRecord::Base
 
   has_one :donation_metum
 
-  belongs_to :donation_status
-
-  def status
-    donation_status.name if donation_status
-  end
-
+  belongs_to :status, :class_name => "DonationStatus"
+  has_one :pickup
+  has_one :dropoff
+  
   private
-  # Set the default status when a donation is created.
-  def default_status
-    self.status = DonationStatus.find(0)
-  end
+
+    # Set the default status when a donation is created.
+    def set_default_values
+      self.status ||= DonationStatus.find(0)
+    end
 
 end
