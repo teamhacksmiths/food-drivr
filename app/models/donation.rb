@@ -10,7 +10,9 @@ class Donation < ActiveRecord::Base
   has_one :donation_metum
 
   belongs_to :status, :class_name => "DonationStatus"
-
+  has_one :pickup
+  has_one :dropoff
+  
   private
 
     # Set the default status when a donation is created.
