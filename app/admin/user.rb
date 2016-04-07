@@ -3,9 +3,20 @@ ActiveAdmin.register User do
   config.batch_actions = false
 
   scope :all, default: true
-  scope("Donors") {|scope| scope.where("users.role_id=?", 0)}
-  scope("Drivers") {|scope| scope.where("users.role_id=?", 1)}
-  scope("Others") {|scope| scope.where("users.role_id=?", 2)}
+  controller do
+    before_filter :update_scopes, :only => :index
+
+    def update_scopes
+      resource = active_admin_config
+
+      Role.order(id: :asc).each do |r|
+        next if resource.scopes.any? { |scope| scope.name == r.description }
+        resource.scopes << (ActiveAdmin::Scope.new r.description do |user| 
+          user.where(:role => r.id)
+        end)
+      end
+    end
+  end
 
   index do
     column("ID", :sortable => :id) {|user| link_to "#{user.id}", admin_user_path(user) }
