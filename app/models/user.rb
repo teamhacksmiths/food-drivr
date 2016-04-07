@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
   has_many :pickups, through: :donations
   has_many :dropoffs, through: :donations
 
-  # Access with the def role.
+  # User should have a role_id, although we may want to look into setting
+  # Up seperate classes. 
   belongs_to :role
 
   def generate_authentication_token!
