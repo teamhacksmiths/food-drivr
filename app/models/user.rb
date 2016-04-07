@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
   before_create :generate_authentication_token!
   validates :auth_token, uniqueness: true
 
@@ -23,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :dropoffs, through: :donations
 
   # User should have a role_id, although we may want to look into setting
-  # Up seperate classes. 
+  # Up seperate classes.
   belongs_to :role
 
   def generate_authentication_token!
