@@ -1,22 +1,22 @@
 ActiveAdmin.register Donation do
 
+# See permitted parameters documentation:
+# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
+#
+# permit_params :list, :of, :attributes, :on, :model
+#
+# or
+#
+# permit_params do
+#   permitted = [:permitted, :attributes]
+#   permitted << :other if params[:action] == 'create' && current_user.admin?
+#   permitted
+# end
   config.batch_actions = false
 
   scope :all, default: true
-
-  controller do
-    before_filter :update_scopes, :only => :index
-
-    def update_scopes
-      resource = active_admin_config
-
-      DonationStatus.order(id: :asc).each do |s|
-        next if resource.scopes.any? { |scope| scope.name == s.name  }
-        resource.scopes << (ActiveAdmin::Scope.new s.name do |donations| 
-          donations.where(:status_id => s.id)
-        end)
-      end
-    end
+  DonationStatus.order(id: :asc).each do |s|
+    scope(s.name) { |scope| scope.where("donations.status_id=?", s.id) }
   end
 
   index do
