@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   before_create :generate_authentication_token!
   validates :auth_token, uniqueness: true
 
-  has_one :settings
+  # has_one :settings
 
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
