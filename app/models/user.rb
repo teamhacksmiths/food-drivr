@@ -3,11 +3,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-         
+
   before_create :generate_authentication_token!
   validates :auth_token, uniqueness: true
 
-  has_one :settings
+  has_one :setting
 
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
