@@ -3,7 +3,7 @@
 SabisuRails.setup do |config|
 
   # Base uri for posting the
-  config.base_api_uri = 'api.fooddrivr.com'
+  config.base_api_uri = 'wastenotfoodtaxi.herukuapp.com'
 
   # Ignored attributes for building the forms
   # config.ignored_attributes = %w{ created_at updated_at id }
@@ -22,7 +22,7 @@ SabisuRails.setup do |config|
   # config.layout = "sabisu"
 
   # Resources on the api
-   config.resources = [:users]
+   config.resources = [:users, :donations]
 
   # Default resource
    config.default_resource = :users

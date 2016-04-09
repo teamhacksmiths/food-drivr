@@ -56,8 +56,8 @@ end
 
 
 # Dummy donations
-donors = User.where(role_id: 0)
-drivers = User.where(role_id: 1)
+donors = Donor.all
+drivers = Driver.all
 recipients = Recipient.all
 statuses = DonationStatus.all
 
