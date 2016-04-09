@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403161600) do
+ActiveRecord::Schema.define(version: 20160407215352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20160403161600) do
     t.integer  "driver_id"
     t.integer  "recipient_id"
     t.integer  "status_id"
+    t.string   "description"
   end
 
   create_table "dropoffs", force: :cascade do |t|
@@ -110,6 +111,16 @@ ActiveRecord::Schema.define(version: 20160403161600) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.boolean  "notifications"
+    t.boolean  "active"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+  end
+
+  add_index "settings", ["user_id"], name: "index_settings_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                          null: false
@@ -131,9 +142,11 @@ ActiveRecord::Schema.define(version: 20160403161600) do
     t.string   "auth_token",             default: ""
   end
 
+  add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "dropoffs", "donations"
   add_foreign_key "pickups", "donations"
+  add_foreign_key "settings", "users"
 end

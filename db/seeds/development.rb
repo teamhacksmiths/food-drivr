@@ -1,11 +1,11 @@
-AdminUser.create!(email: 'admin@example.com', 
-                  password: 'password', 
+AdminUser.create!(email: 'admin@example.com',
+                  password: 'password',
                   password_confirmation: 'password')
 
 
 # Dummy donor user
 User.create!(name: 'Donor User',
-             email: 'donor@hacksmiths.com', 
+             email: 'donor@hacksmiths.com',
              password: 'password',
              password_confirmation: 'password',
              description: 'An dummy donor user',
@@ -15,7 +15,7 @@ User.create!(name: 'Donor User',
 
 # Dummy driver user
 User.create!(name: 'Driver User',
-             email: 'driver@hacksmiths.com', 
+             email: 'driver@hacksmiths.com',
              password: 'password',
              password_confirmation: 'password',
              description: 'An dummy driver user',
@@ -25,7 +25,7 @@ User.create!(name: 'Driver User',
 
 # Dummy other user
 User.create!(name: 'Other User',
-             email: 'other@hacksmiths.com', 
+             email: 'other@hacksmiths.com',
              password: 'password',
              password_confirmation: 'password',
              description: 'An dummy other user',

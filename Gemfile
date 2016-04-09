@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'pg'
 
+
 # active admin dependencies
 gem 'devise'
 gem 'cancan' # or cancancan
@@ -36,7 +37,7 @@ end
 
 # Sabisu_rails is for API testing
 gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
-gem 'compass-rails'
+gem 'compass-rails', '~> 2.0.2'
 gem 'furatto'
 gem 'font-awesome-rails'
 gem 'simple_form'
