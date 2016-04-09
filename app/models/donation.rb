@@ -12,6 +12,8 @@ class Donation < ActiveRecord::Base
   has_one :pickup
   has_one :dropoff
 
+  has_many :donation_types
+
   private
 
     # Set the default status when a donation is created.
