@@ -2,9 +2,8 @@ class Donation < ActiveRecord::Base
 
   after_initialize :set_default_values
 
-
-  belongs_to :donor, :class_name => "User", :foreign_key => "donor_id"
-  belongs_to :driver, :class_name => "User", :foreign_key => "driver_id"
+  belongs_to :donor, :class_name => "Donor", :foreign_key => "donor_id"
+  belongs_to :driver, :class_name => "Driver", :foreign_key => "driver_id"
   belongs_to :recipient
 
   has_one :donation_metum
@@ -12,7 +11,7 @@ class Donation < ActiveRecord::Base
   belongs_to :status, :class_name => "DonationStatus"
   has_one :pickup
   has_one :dropoff
-  
+
   private
 
     # Set the default status when a donation is created.
