@@ -16,13 +16,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  has_many :donations, foreign_key: "donor_id", class_name: "Donation"
 
-  # Has many pickups and dropoffs through donations,
-  # i.e. if they are a driver, they can have many pickups and dropoffs
 
-  has_many :pickups, through: :donations
-  has_many :dropoffs, through: :donations
 
   # User should have a role_id, although we may want to look into setting
   # Up seperate classes.

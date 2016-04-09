@@ -8,6 +8,14 @@ default: &default
   # access linked services via docker-compose
   host: <%= ENV['POSTGRES_PORT_5432_TCP_ADDR'] %>
   port: <%= ENV['POSTGRES_PORT_5432_TCP_PORT'] %>
+  
+cloud: &cloud
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: <%= ENV['USERNAME'] %>
+  password: <%= ENV['PASSWORD'] %>
+  host:     <%= ENV['IP'] %>
 
 development:
   <<: *default
