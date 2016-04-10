@@ -3,7 +3,7 @@
 SabisuRails.setup do |config|
 
   # Base uri for posting the
-  config.base_api_uri = 'wastenotfoodtaxi.herukuapp.com'
+  config.base_api_uri = 'wastenotfoodtaxi.herokuapp.com'
 
   # Ignored attributes for building the forms
   # config.ignored_attributes = %w{ created_at updated_at id }
@@ -33,9 +33,9 @@ SabisuRails.setup do |config|
 
   # Authentication
   # mattr_accessor :authentication_username
-  # @@authentication_username = "admin"
+  @@authentication_username = "admin"
 
   # mattr_accessor :authentication_password
-  # @@authentication_password = "sekret"
+  @@authentication_password = config.secret_admin_password
 
 end
