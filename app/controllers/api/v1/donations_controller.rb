@@ -8,7 +8,7 @@ class Api::V1::DonationsController < ApplicationController
   end
 
   def index
-    respond_with Product.all
+    respond_with Donation.all
   end
 
   # For creating a new donation:
