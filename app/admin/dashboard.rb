@@ -2,13 +2,31 @@ ActiveAdmin.register_page "Dashboard" do
 
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
+
+  # Setup a simple list of most recent donations
   content title: proc{ I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
+    columns do
+      column do
+        panel "Recent Pending Donations" do
+          ul do
+            Donation.most_recent.first(5).map do |donation|
+              li link_to(donation.recipient.name, admin_donation_path(donation))
+            end
+          end
+        end
+      end
+      column do
+        panel "Recently Completed Donation" do
+
+        end
+      end
+      column do
+        panel "Recently Suspended Donations" do
+          
+        end
       end
     end
+
 
     # Here is an example of a simple dashboard with columns and panels.
     #

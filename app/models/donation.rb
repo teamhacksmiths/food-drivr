@@ -14,11 +14,17 @@ class Donation < ActiveRecord::Base
 
   has_many :donation_types
 
+
+  def self.most_recent
+    Donation.where(status: 0).order(updated_at: :desc)
+  end
+
   private
 
     # Set the default status when a donation is created.
     def set_default_values
       self.status ||= DonationStatus.find(0)
     end
+
 
 end
