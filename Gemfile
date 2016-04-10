@@ -44,6 +44,9 @@ gem 'furatto'
 gem 'font-awesome-rails'
 gem 'simple_form'
 
+# Oauth provider
+gem 'omniauth-oauth2'
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   #gem 'web-console', '~> 2.0'
@@ -51,9 +54,14 @@ group :development do
   gem 'better_errors', '~> 2.1', '>= 2.1.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # A collection of "Nifty" rails generators
+  gem "nifty-generators"
 end
 
 group :production do
   gem 'rails_12factor', '0.0.2'
   gem 'puma',           '3.1.0'
 end
+
+gem 'mocha', group: :test
