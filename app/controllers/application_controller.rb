@@ -4,4 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   include Authenticable
+  def index
+    render text: "Welcome to the Wast Not Food Taxi API!"
+  end
 end
