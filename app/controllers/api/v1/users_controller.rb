@@ -39,7 +39,7 @@ class Api::V1::UsersController < ApplicationController
     # User params accepted at this point for creating a user are:
       # name, email, password and password_confirmation
     def user_params
-      params.require(:user).permit(:email, :name, :password, :password_confirmation)
+      params.require(:user).permit(:email, :role, :name, :password, :password_confirmation)
     end
 
 end
