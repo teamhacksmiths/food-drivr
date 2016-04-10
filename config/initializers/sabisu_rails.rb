@@ -36,6 +36,6 @@ SabisuRails.setup do |config|
   @@authentication_username = "admin"
 
   # mattr_accessor :authentication_password
-  @@authentication_password = config.secret_admin_password
+  @@authentication_password = ENV["ADMIN_PASSWORD"] || "sekret"
 
 end
