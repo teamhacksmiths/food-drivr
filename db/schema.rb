@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160410210234) do
+ActiveRecord::Schema.define(version: 20160413010621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,11 +81,16 @@ ActiveRecord::Schema.define(version: 20160410210234) do
   create_table "dropoffs", force: :cascade do |t|
     t.datetime "estimated"
     t.datetime "actual"
-    t.decimal  "latitude",    precision: 15, scale: 10, default: 0.0
-    t.decimal  "longitude",   precision: 15, scale: 10, default: 0.0
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.decimal  "latitude",           precision: 15, scale: 10, default: 0.0
+    t.decimal  "longitude",          precision: 15, scale: 10, default: 0.0
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
     t.integer  "donation_id"
+    t.string   "street_address"
+    t.string   "street_address_two"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
   end
 
   add_index "dropoffs", ["donation_id"], name: "index_dropoffs_on_donation_id", using: :btree
@@ -93,11 +98,16 @@ ActiveRecord::Schema.define(version: 20160410210234) do
   create_table "pickups", force: :cascade do |t|
     t.datetime "estimated"
     t.datetime "actual"
-    t.decimal  "latitude",    precision: 15, scale: 10, default: 0.0
-    t.decimal  "longitude",   precision: 15, scale: 10, default: 0.0
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.decimal  "latitude",           precision: 15, scale: 10, default: 0.0
+    t.decimal  "longitude",          precision: 15, scale: 10, default: 0.0
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
     t.integer  "donation_id"
+    t.string   "street_address"
+    t.string   "street_address_two"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
   end
 
   add_index "pickups", ["donation_id"], name: "index_pickups_on_donation_id", using: :btree
