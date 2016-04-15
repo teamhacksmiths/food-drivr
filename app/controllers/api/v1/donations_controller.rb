@@ -15,7 +15,7 @@ class Api::V1::DonationsController < ApplicationController
   def create
     donation = current_user.donations.build(donation_params)
     if donation.save
-      render json: donation, status: 201, location: [:api, donation]
+      render json: donation, status: 201, location: [:api_v1, donation]
     else
       render json: { errors: donations.errors }, status: 422
     end
@@ -24,7 +24,7 @@ class Api::V1::DonationsController < ApplicationController
   def update
     donation = current_user.donations.find(params[:id])
     if donations.update(donation_params)
-      render json: donation, status: 200, location: [:api, product]
+      render json: donation, status: 200, location: [:api_v1, donation]
     else
       render json: { errors: product.errors }, status: 422
     end
