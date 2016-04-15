@@ -66,8 +66,8 @@ Ruby on Rails
 * **David Harris**
 * **Peter James Bernante**
 * **Kevin Windisch**
-## License
 
+## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.  Anyone anywhere can feel free to clone this repo to use for the purposes of streamlining their food donations.
 
 ## Acknowledgments
