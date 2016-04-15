@@ -1,5 +1,5 @@
 class Api::V1::DonationsController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create, :update]
+  before_action :authenticate_with_token!
 
   respond_to :json
 
@@ -45,5 +45,8 @@ class Api::V1::DonationsController < ApplicationController
   # TODO: add a better mechanism for how the recipient is created.
   def recipient_params
     params.require(:recipient).permit(:id, :name)
+  end
+  def pickup_params
+    params.require(:pickup).permit(:driver_id)
   end
 end
