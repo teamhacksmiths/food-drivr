@@ -29,8 +29,12 @@ class User < ActiveRecord::Base
     end while self.class.exists?(auth_token: auth_token)
   end
 
-  def setup_defaults
-
+  def set_defaults
+    unless role
+      # Set the default role as other until a role is passed in.
+        # Also, need to set the "Type"
+      self.role = Role.find(2)
+    end
   end
 
 end

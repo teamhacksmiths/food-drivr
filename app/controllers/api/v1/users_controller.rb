@@ -1,5 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authenticate_with_token!
+  skip_before_action :verify_authenticity_token
+  
   respond_to :json
 
   # Show: send JSON data with user found with ID
