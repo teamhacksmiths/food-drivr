@@ -47,6 +47,7 @@ gem 'simple_form'
 # Oauth provider
 gem 'omniauth-oauth2'
 
+
 gem 'cloudinary'
 
 group :development do
