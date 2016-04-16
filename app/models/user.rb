@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :role, presence: true
 
   has_one :organization
-  has_one :setting
+  has_one :setting, autosave: true, dependent: :destroy
 
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }

@@ -4,9 +4,14 @@ class Api::V1::UsersController < ApplicationController
 
   respond_to :json
 
-  # Show: send JSON data with user found with ID
+  # Send the current_user or throw an error
   def show
-    respond_with User.find(params[:id])
+    current_user = User.find_by(auth_token: params[:auth_token])
+    if current_user
+      respond_with current_user, serialier: UserSerializer
+    else
+      render json: { errors: "Invalid request" }, status: 422
+    end
   end
 
   # Create will create a new user with the passed in Params and
@@ -23,18 +28,11 @@ class Api::V1::UsersController < ApplicationController
   # Update will update a user with the params passed in.
   # We need to make sure to safeguard against bad params in the model layer
   def update
-    user = current_user
-    if user.update(user_params)
+    if current_user.update(user_params)
       render json: user, status: 200, location: [:api_v1, user]
     else
       render json: { errors: user.errors }, status: 422
     end
-  end
-
-  # Delete the current user from the database and send 204
-  def destroy
-    current_user.destroy
-    head 204
   end
 
   private

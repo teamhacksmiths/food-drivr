@@ -185,7 +185,6 @@ GEM
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    nifty-generators (0.4.6)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     oauth2 (1.1.0)
@@ -332,7 +331,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mocha
-  nifty-generators
   omniauth-oauth2
   pg
   puma (= 3.1.0)

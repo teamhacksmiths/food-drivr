@@ -3,14 +3,13 @@ class Setting < ActiveRecord::Base
   after_initialize :set_defaults
 
   def set_defaults
-    self.notifications = false
-    user = User.find(user.id)
-    if user
-      if user.role = Role.find_by(description: "Driver")
-        self.active = false
-      else
+    if self.active.nil?
+      if user.role_id == 0
         self.active = true
+      elsif user.role_id == 1
+        self.active = false
       end
     end
+    self.notifications = false if self.notifications.nil? 
   end
 end
