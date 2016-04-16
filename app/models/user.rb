@@ -5,8 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   before_create :generate_authentication_token!
+  after_initialize :set_defaults
+
   validates :auth_token, uniqueness: true
-  
+  validates :role, presence: true
+
   has_one :setting
 
   before_save { self.email = email.downcase }
@@ -16,8 +19,6 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
 
-
-
   # User should have a role_id, although we may want to look into setting
   # Up seperate classes.
   belongs_to :role
@@ -26,6 +27,10 @@ class User < ActiveRecord::Base
     begin
       self.auth_token = Devise.friendly_token
     end while self.class.exists?(auth_token: auth_token)
+  end
+
+  def setup_defaults
+
   end
 
 end

@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_with_token!, only: [:update, :destroy]
+  before_action :authenticate_with_token!
   respond_to :json
 
   # Show: send JSON data with user found with ID
@@ -39,7 +39,7 @@ class Api::V1::UsersController < ApplicationController
     # User params accepted at this point for creating a user are:
       # name, email, password and password_confirmation
     def user_params
-      params.require(:user).permit(:email, :role_id, :role, :phone, :name, :password, :password_confirmation)
+      params.require(:user).permit(:email, :role_id, :phone, :organization, :name, :password, :password_confirmation)
     end
 
 end
