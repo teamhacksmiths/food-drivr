@@ -2,10 +2,10 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 # Define user roles
-# Role.create!(id: 0, description: 'Donor')
-# Role.create!(id: 1, description: 'Driver')
-# Role.create!(id: 2, description: 'Other')
-# Role.create!(id: 3, description: 'Unassigned')
+Role.create!(id: 0, description: 'Donor')
+Role.create!(id: 1, description: 'Driver')
+Role.create!(id: 2, description: 'Other')
+Role.create!(id: 3, description: 'Unassigned')
 
 # Define donatan status
 DonationStatus.create!(name: 'Pending', id: 0)
