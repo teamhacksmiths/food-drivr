@@ -1,5 +1,6 @@
 class Api::V1::DonationsController < ApplicationController
   before_action :authenticate_with_token!
+  skip_before_action :verify_authenticity_token
 
   respond_to :json
 
@@ -39,7 +40,7 @@ class Api::V1::DonationsController < ApplicationController
   private
 
   def donation_params
-    params.require(:donation).permit(:recipient, :status_id) #TODO: add params for donations
+    params.require(:donation).permit(:recipient, :status_id, :description) #TODO: add params for donations
   end
 
   # TODO: add a better mechanism for how the recipient is created.
