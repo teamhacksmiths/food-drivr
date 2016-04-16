@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416153819) do
+ActiveRecord::Schema.define(version: 20160416162224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,29 @@ ActiveRecord::Schema.define(version: 20160416153819) do
 
   add_index "dropoffs", ["donation_id"], name: "index_dropoffs_on_donation_id", using: :btree
 
+  create_table "organization_addresses", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "street_address"
+    t.string   "street_address_two"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+  end
+
+  add_index "organization_addresses", ["organization_id"], name: "index_organization_addresses_on_organization_id", using: :btree
+
+  create_table "organizations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "phone"
+  end
+
+  add_index "organizations", ["user_id"], name: "index_organizations_on_user_id", using: :btree
+
   create_table "pickups", force: :cascade do |t|
     t.datetime "estimated"
     t.datetime "actual"
@@ -169,6 +192,8 @@ ActiveRecord::Schema.define(version: 20160416153819) do
 
   add_foreign_key "donation_types", "donations"
   add_foreign_key "dropoffs", "donations"
+  add_foreign_key "organization_addresses", "organizations"
+  add_foreign_key "organizations", "users"
   add_foreign_key "pickups", "donations"
   add_foreign_key "settings", "users"
 end

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validates :auth_token, uniqueness: true
   validates :role, presence: true
 
+  has_one :organization
   has_one :setting
 
   before_save { self.email = email.downcase }
