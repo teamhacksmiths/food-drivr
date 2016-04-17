@@ -5,8 +5,8 @@ class UserSerializer < ActiveModel::Serializer
 
   def settings
     custom_settings = {}
-    custom_settings[:notifications] = object.setting.notifications
-    custom_settings[:active] = object.setting.active
+    custom_settings[:notifications] = object.setting.notifications || false
+    custom_settings[:active] = object.setting.active || false
     custom_settings
   end
   def organization
