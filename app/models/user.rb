@@ -36,6 +36,17 @@ class User < ActiveRecord::Base
         # Also, need to set the "Type"
       self.role = Role.find(2)
     end
+    set_default_settings
+  end
+
+  def set_default_settings
+    unless setting
+      if self.role_id == 0
+        self.setting = Setting.create(active: true, notifications: false)
+      else
+        self.setting = Setting.create(active: false, notifications: false)
+      end
+    end
   end
 
 end
