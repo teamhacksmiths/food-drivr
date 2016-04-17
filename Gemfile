@@ -37,9 +37,9 @@ group :development, :test do
   gem 'byebug'
   gem "rspec-rails"
   gem "factory_girl_rails"
-  gem 'ffaker'
 end
 
+gem 'ffaker'
 # Sabisu_rails is for API testing
 gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
 gem 'compass-rails', '~> 2.0.2'
