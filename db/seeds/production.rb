@@ -45,6 +45,30 @@ User.create!(name: 'Other User',
                role_id: [*0..2].sample)
 end
 
+100.times do |n|
+  Organization.create(name: FFaker::Company.name,
+                      phone: FFaker::PhoneNumber.phone_number)
+end
+
+
+users = User.all
+orgs = Organization.all
+
+orgs.each do |o|
+  o.organization_address = OrganizationAddress.create(organization_id: o.id,
+                                         street_address: FFaker::AddressUS.street_address,
+                                         street_address_two: FFaker::AddressUS.secondary_address,
+                                         city: FFaker::AddressUS.city,
+                                         state: FFaker::AddressUS.state,
+                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_i)
+end
+
+users.each do |u|
+  u.organization = orgs.sample
+  u.save
+end
+
+
 # Dummy recipients
 100.times do |n|
   Recipient.create!(name: FFaker::Company.name,
@@ -93,4 +117,24 @@ donation.each do |d|
   local_ids.delete type_id
   next_type_id = local_ids.sample
   Type.create!(donation_id: d.id, donation_type_id: next_type_id)
+
+  d.pickup = Pickup.create(estimated: FFaker::Time.datetime,
+                           actual: FFaker::Time.datetime,
+                           donation_id: d.id,
+                           latitude: FFaker::Geolocation.lat,
+                           longitude: FFaker::Geolocation.long,
+                           street_address: FFaker::AddressUS.street_address,
+                           street_address_two: FFaker::AddressUS.secondary_address,
+                           city: FFaker::AddressUS.city,
+                           zip: FFaker::AddressUS.zip_code.split('-')[0].to_i )
+
+   d.dropoff = Dropoff.create(estimated: FFaker::Time.datetime,
+                            actual: FFaker::Time.datetime,
+                            donation_id: d.id,
+                            latitude: FFaker::Geolocation.lat,
+                            longitude: FFaker::Geolocation.long,
+                            street_address: FFaker::AddressUS.street_address,
+                            street_address_two: FFaker::AddressUS.secondary_address,
+                            city: FFaker::AddressUS.city,
+                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_i )
 end

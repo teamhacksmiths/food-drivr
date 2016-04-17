@@ -45,6 +45,30 @@ User.create!(name: 'Other User',
                role_id: [*0..2].sample)
 end
 
+100.times do |n|
+  Organization.create(name: FFaker::Company.name,
+                      phone: FFaker::PhoneNumber.phone_number)
+end
+
+
+users = User.all
+orgs = Organization.all
+
+orgs.each do |o|
+  o.organization_address = OrganizationAddress.create(organization_id: o.id,
+                                         street_address: FFaker::AddressUS.street_address,
+                                         street_address_two: FFaker::AddressUS.secondary_address,
+                                         city: FFaker::AddressUS.city,
+                                         state: FFaker::AddressUS.state,
+                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_i)
+end
+
+users.each do |u|
+  u.organization = orgs.sample
+  u.save
+end
+
+
 # Dummy recipients
 100.times do |n|
   Recipient.create!(name: FFaker::Company.name,
@@ -55,15 +79,62 @@ end
 end
 
 
+10.times do |n|
+  DonationType.create(description: FFaker::Food.fruit)
+end
+
 # Dummy donations
 donors = Donor.all
 drivers = Driver.all
 recipients = Recipient.all
 statuses = DonationStatus.all
+types = DonationType.all
+
 
 100.times do |n|
   Donation.create!(donor: donors.sample,
                    driver: drivers.sample,
                    recipient: recipients.sample,
+                   description: FFaker::HipsterIpsum.phrase,
                    status: statuses.sample)
+
+end
+
+# Create sample of types for donations
+donation = Donation.all
+
+# Loop through and create an array of type_ids
+donation_type_ids = []
+types.each do |t|
+  donation_type_ids << t.id
+end
+
+donation.each do |d|
+  # make sure that we are creating truly unique types
+  local_ids = donation_type_ids
+  type_id = local_ids.sample
+  Type.create!(donation_id: d.id, donation_type_id: type_id)
+  local_ids.delete type_id
+  next_type_id = local_ids.sample
+  Type.create!(donation_id: d.id, donation_type_id: next_type_id)
+
+  d.pickup = Pickup.create(estimated: FFaker::Time.date,
+                           actual: FFaker::Time.date,
+                           donation_id: d.id,
+                           latitude: FFaker::Geolocation.lat,
+                           longitude: FFaker::Geolocation.lng,
+                           street_address: FFaker::AddressUS.street_address,
+                           street_address_two: FFaker::AddressUS.secondary_address,
+                           city: FFaker::AddressUS.city,
+                           zip: FFaker::AddressUS.zip_code.split('-')[0].to_i )
+
+   d.dropoff = Dropoff.create(estimated: FFaker::Time.date,
+                            actual: FFaker::Time.date,
+                            donation_id: d.id,
+                            latitude: FFaker::Geolocation.lat,
+                            longitude: FFaker::Geolocation.lng,
+                            street_address: FFaker::AddressUS.street_address,
+                            street_address_two: FFaker::AddressUS.secondary_address,
+                            city: FFaker::AddressUS.city,
+                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_i )
 end

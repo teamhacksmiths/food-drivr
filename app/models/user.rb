@@ -51,13 +51,13 @@ class User < ActiveRecord::Base
   end
 
   def set_type_for_role
-    if self.role
+    # Set the default type if the role is donor or driver
+    if self.role && self.role.id < 2
       self.type = self.role.description
     else
       # Set the default type as unassigned and then call
       # set_type_for_role
       self.role = Role.last
-      set_type_for_role
     end
   end
 
