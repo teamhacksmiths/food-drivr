@@ -1,4 +1,5 @@
 class Organization < ActiveRecord::Base
   belongs_to :user
-  has_many :organization_addresses
+
+  has_one :organization_addresses
 end
