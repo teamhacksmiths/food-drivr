@@ -118,21 +118,21 @@ donation.each do |d|
   next_type_id = local_ids.sample
   Type.create!(donation_id: d.id, donation_type_id: next_type_id)
 
-  d.pickup = Pickup.create(estimated: FFaker::Time.datetime,
-                           actual: FFaker::Time.datetime,
+  d.pickup = Pickup.create(estimated: FFaker::Time.date,
+                           actual: FFaker::Time.date,
                            donation_id: d.id,
                            latitude: FFaker::Geolocation.lat,
-                           longitude: FFaker::Geolocation.long,
+                           longitude: FFaker::Geolocation.lng,
                            street_address: FFaker::AddressUS.street_address,
                            street_address_two: FFaker::AddressUS.secondary_address,
                            city: FFaker::AddressUS.city,
                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_i )
 
-   d.dropoff = Dropoff.create(estimated: FFaker::Time.datetime,
-                            actual: FFaker::Time.datetime,
+   d.dropoff = Dropoff.create(estimated: FFaker::Time.date,
+                            actual: FFaker::Time.date,
                             donation_id: d.id,
                             latitude: FFaker::Geolocation.lat,
-                            longitude: FFaker::Geolocation.long,
+                            longitude: FFaker::Geolocation.lng,
                             street_address: FFaker::AddressUS.street_address,
                             street_address_two: FFaker::AddressUS.secondary_address,
                             city: FFaker::AddressUS.city,
