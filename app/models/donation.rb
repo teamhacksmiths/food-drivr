@@ -15,6 +15,8 @@ class Donation < ActiveRecord::Base
   has_many :types
   has_many :donation_types, through: :types
 
+  has_many :images, :class_name => "DonationImage"
+
   def self.most_recent
     Donation.where(status: 0).order(updated_at: :desc)
   end

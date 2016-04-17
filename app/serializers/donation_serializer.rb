@@ -4,8 +4,10 @@ class DonationSerializer < ActiveModel::Serializer
   has_one :dropoff
   has_one :recipient
 
+  has_many :images
+
   def participants
-    { :donor => donor, :driver => driver}
+    { :donor => donor, :driver => driver }
   end
   def donor
     DonorSerializer.new(object.donor).attributes if object.donor

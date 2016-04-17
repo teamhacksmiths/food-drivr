@@ -52,9 +52,17 @@ class Api::V1::DonationsController < ApplicationController
                                       :donation_id, :city, :state, :zip)
   end
   def pickup_params
-    params.require(:pickup).permit(:driver_id)
+    params.require(:pickup).permit(:estimated, :actual,
+                                   :latitude, :longitude,
+                                   :donation_id, :street_address,
+                                   :street_address_two, :city,
+                                   :state, :zip)
   end
   def dropoff_params
-    params.require(:dropoff).permit(:driver_id)
+    params.require(:dropoff).permit(:estimated, :actual,
+                                   :latitude, :longitude,
+                                   :donation_id, :street_address,
+                                   :street_address_two, :city,
+                                   :state, :zip)
   end
 end

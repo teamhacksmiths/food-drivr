@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     # TODO: enforce namespace / versioning: constraints: ApiConstraints.new(version: 1, default: true)
     namespace :v1 do
-      get '/user', to: 'users#show'
       resources :users, :only => [:show, :create, :update], param: :auth_token
       resources :donor do
         resources :donations, :only => [:create, :update, :destroy]

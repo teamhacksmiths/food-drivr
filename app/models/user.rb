@@ -60,5 +60,4 @@ class User < ActiveRecord::Base
       self.role = Role.last
     end
   end
-
 end

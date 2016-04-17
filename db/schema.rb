@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417184910) do
+ActiveRecord::Schema.define(version: 20160417230605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 20160417184910) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "donation_images", force: :cascade do |t|
+    t.integer  "donation_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "url"
+  end
+
+  add_index "donation_images", ["donation_id"], name: "index_donation_images_on_donation_id", using: :btree
 
   create_table "donation_meta", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -198,6 +207,7 @@ ActiveRecord::Schema.define(version: 20160417184910) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "donation_images", "donations"
   add_foreign_key "dropoffs", "donations"
   add_foreign_key "organization_addresses", "organizations"
   add_foreign_key "organizations", "users"

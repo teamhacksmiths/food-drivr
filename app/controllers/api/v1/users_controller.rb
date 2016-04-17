@@ -44,5 +44,4 @@ class Api::V1::UsersController < ApplicationController
     def organization_params
       params.require(:organization).permit(:name, :address)
     end
-
 end

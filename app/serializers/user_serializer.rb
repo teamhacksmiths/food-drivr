@@ -11,7 +11,7 @@ class UserSerializer < ActiveModel::Serializer
       custom_settings
     end
   end
-  def address
+  def default_address
     address = object.organization.organization_address
     return_address = {}
     return_address[:street_address] = address.street_address.to_s
@@ -20,5 +20,7 @@ class UserSerializer < ActiveModel::Serializer
     return_address[:state] = address.state.to_s
     return_address[:zip] = address.zip.to_s
     return_address
+  end
+  def organization
   end
 end
