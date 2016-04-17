@@ -55,6 +55,6 @@ class Api::V1::DonationsController < ApplicationController
     params.require(:pickup).permit(:driver_id)
   end
   def dropoff_params
-    params.require(:dropoff).permit(:donor_id)
+    params.require(:dropoff).permit(:driver_id)
   end
 end
