@@ -1,5 +1,5 @@
 class DonationSerializer < ActiveModel::Serializer
-  attributes :id, :description, :created_at, :updated_at, :participants, :donation_types
+  attributes :id, :description, :created_at, :status_id, :updated_at, :participants, :donation_types
   has_one :pickup
   has_one :dropoff
   has_one :recipient
