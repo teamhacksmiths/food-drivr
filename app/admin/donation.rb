@@ -15,13 +15,13 @@ ActiveAdmin.register Donation do
   config.batch_actions = false
 
   scope :all, default: true
-  # DonationStatus.order(id: :asc).each do |s|
-  #   scope(s.name) { |scope| scope.where("donations.status_id=?", s.id) }
-  # end
+  DonationStatus.order(id: :asc).each do |s|
+    scope(s.name) { |scope| scope.where("donations.status_id=?", s.id) }
+  end
 
   index do
     column("ID", :sortable => :id) {|d| link_to "#{d.id}", admin_donation_path(d) }
-    # column("Status")               {|d| status_tag(d.status.name) }
+    column("Status")               {|d| status_tag(d.status.name) }
     column("Recipient")            {|d| link_to d.recipient.name, admin_recipient_path(d.recipient) }
     column("Donor")                {|d| link_to d.donor.name, admin_user_path(d.donor) }
     column("Driver")               {|d| link_to d.driver.name, admin_user_path(d.driver) }
