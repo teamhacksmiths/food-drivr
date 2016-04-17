@@ -9,9 +9,9 @@ class DonationSerializer < ActiveModel::Serializer
     { :donor => donor, :driver => driver}
   end
   def donor
-    DonorSerializer.new(object.donor).attributes
+    DonorSerializer.new(object.donor).attributes if object.donor
   end
   def driver
-    DriverSerializer.new(object.driver).attributes
+    DriverSerializer.new(object.driver).attributes if object.driver
   end
 end
