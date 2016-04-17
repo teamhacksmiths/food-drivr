@@ -42,7 +42,7 @@ class Api::V1::UsersController < ApplicationController
       params.require(:user).permit(:email, :role_id, :phone, :name, :password, :password_confirmation)
     end
     def organization_params
-      params.require(:organization).permit()
+      params.require(:organization).permit(:name, :address, :)
     end
 
 end
