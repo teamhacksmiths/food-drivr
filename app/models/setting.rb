@@ -4,12 +4,12 @@ class Setting < ActiveRecord::Base
 
   def set_defaults
     if self.active.nil?
-      if user.role_id == 0
+      if user && user.role_id = 0
         self.active = true
-      elsif user.role_id == 1
+      else
         self.active = false
       end
     end
-    self.notifications = false if self.notifications.nil? 
+    self.notifications = false if self.notifications.nil?
   end
 end
