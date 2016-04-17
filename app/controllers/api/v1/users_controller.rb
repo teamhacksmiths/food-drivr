@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
   def show
     current_user = User.find_by(auth_token: params[:auth_token])
     if current_user
-      respond_with current_user, serialier: UserSerializer
+      respond_with current_user, serializer: UserSerializer
     else
       render json: { errors: "Invalid request" }, status: 422
     end
