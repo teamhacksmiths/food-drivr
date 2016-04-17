@@ -71,7 +71,7 @@ types = DonationType.all
   Donation.create!(donor: donors.sample,
                    driver: drivers.sample,
                    recipient: recipients.sample,
-                   description: FFaker::String,
+                   description: FFaker::HipsterIpsum.phrase,
                    status: statuses.sample)
 
 end
