@@ -15,7 +15,7 @@ ActiveAdmin.register Donation do
   config.batch_actions = false
 
   scope :all, default: true
-  if DonationStatus.first
+  if database_exists?
     DonationStatus.order(id: :asc).each do |s|
       scope(s.name) { |scope| scope.where("donations.status_id=?", s.id) }
     end
@@ -23,13 +23,21 @@ ActiveAdmin.register Donation do
 
   index do
     column("ID", :sortable => :id) {|d| link_to "#{d.id}", admin_donation_path(d) }
-    column("Status")               {|d| status_tag(d.status.name) } if DonationStatus.first
+    column("Status")               {|d| status_tag(d.status.name) } if database_exists?
     column("Recipient")            {|d| link_to d.recipient.name, admin_recipient_path(d.recipient) }
     column("Donor")                {|d| link_to d.donor.name, admin_user_path(d.donor) }
     column("Driver")               {|d| link_to d.driver.name, admin_user_path(d.driver) }
     column "Initiated", :created_at
     column "Updated", :updated_at
     actions
+  end
+
+  def database_exists?
+    ActiveRecord::Base.connection
+  rescue ActiveRecord::NoDatabaseError
+    false
+  else
+    true
   end
 
   permit_params :donor_id, :driver_id, :recipient_id, :status_id
