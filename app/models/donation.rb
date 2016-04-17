@@ -12,11 +12,19 @@ class Donation < ActiveRecord::Base
   has_one :pickup
   has_one :dropoff
 
-  has_many :donation_types
-
+  has_many :types
+  has_many :donation_types, through: :types
 
   def self.most_recent
     Donation.where(status: 0).order(updated_at: :desc)
+  end
+
+  def donation_types_array
+    array = []
+    donation_types.each do |type|
+      array << type.description
+    end
+    array
   end
 
   private

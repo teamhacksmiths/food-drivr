@@ -1,3 +1,4 @@
 class DonationType < ActiveRecord::Base
-  belongs_to :donation
+  has_many :types
+  has_many :donations, through: :type
 end

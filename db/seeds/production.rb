@@ -55,17 +55,22 @@ end
 end
 
 
+10.times do |n|
+  DonationType.create(description: FFaker::Food.fruit)
+end
+
 # Dummy donations
 donors = Donor.all
 drivers = Driver.all
 recipients = Recipient.all
 statuses = DonationStatus.all
+types = DonationType.all
+
 
 100.times do |n|
   Donation.create!(donor: donors.sample,
                    driver: drivers.sample,
                    recipient: recipients.sample,
                    description: FFaker::String,
-                   status: statuses.sample,
-                   donation_types: ["Canned Goods", "Pizza"])
+                   status: statuses.sample)
 end

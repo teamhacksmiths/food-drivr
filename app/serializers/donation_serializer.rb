@@ -1,9 +1,8 @@
 class DonationSerializer < ActiveModel::Serializer
-  attributes :id, :description, :created_at, :updated_at, :participants
+  attributes :id, :description, :created_at, :updated_at, :participants, :donation_types
   has_one :pickup
   has_one :dropoff
   has_one :recipient
-  has_many :donation_types
 
   def participants
     { :donor => donor, :driver => driver}
@@ -13,5 +12,8 @@ class DonationSerializer < ActiveModel::Serializer
   end
   def driver
     DriverSerializer.new(object.driver).attributes if object.driver
+  end
+  def donation_types
+    object.donation_types_array
   end
 end
