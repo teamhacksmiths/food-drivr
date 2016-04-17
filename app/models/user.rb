@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
       self.role = Role.find(2)
     end
     set_default_settings
+    set_type_for_role
   end
 
   def set_default_settings
@@ -46,6 +47,17 @@ class User < ActiveRecord::Base
       else
         self.setting = Setting.create(active: false, notifications: false)
       end
+    end
+  end
+
+  def set_type_for_role
+    if self.role
+      self.type = self.role.description
+    else
+      # Set the default type as unassigned and then call
+      # set_type_for_role
+      self.role = Role.last
+      set_type_for_role
     end
   end
 

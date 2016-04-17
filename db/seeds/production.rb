@@ -65,5 +65,7 @@ statuses = DonationStatus.all
   Donation.create!(donor: donors.sample,
                    driver: drivers.sample,
                    recipient: recipients.sample,
-                   status: statuses.sample)
+                   description: FFaker::String,
+                   status: statuses.sample,
+                   donation_types: ["Canned Goods", "Pizza"])
 end
