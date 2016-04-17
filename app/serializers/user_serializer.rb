@@ -11,7 +11,4 @@ class UserSerializer < ActiveModel::Serializer
       custom_settings
     end
   end
-  def organization
-    nil
-  end
 end
