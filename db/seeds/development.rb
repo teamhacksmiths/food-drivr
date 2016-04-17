@@ -60,7 +60,7 @@ orgs.each do |o|
                                          street_address_two: FFaker::AddressUS.secondary_address,
                                          city: FFaker::AddressUS.city,
                                          state: FFaker::AddressUS.state,
-                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_i)
+                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s)
 end
 
 users.each do |u|
@@ -75,7 +75,8 @@ end
                     street_address: FFaker::AddressUS.street_address,
                     street_address_two: FFaker::AddressUS.secondary_address,
                     city: FFaker::AddressUS.city,
-                    zip_code: FFaker::AddressUS.zip_code.split('-')[0].to_i )
+                    state: FFaker::AddressUS.state,
+                    zip: FFaker::AddressUS.zip_code.split('-')[0].to_s)
 end
 
 
@@ -126,7 +127,8 @@ donation.each do |d|
                            street_address: FFaker::AddressUS.street_address,
                            street_address_two: FFaker::AddressUS.secondary_address,
                            city: FFaker::AddressUS.city,
-                           zip: FFaker::AddressUS.zip_code.split('-')[0].to_i )
+                           state: FFaker::AddressUS.state,
+                           zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
 
    d.dropoff = Dropoff.create(estimated: FFaker::Time.date,
                             actual: FFaker::Time.date,
@@ -136,5 +138,6 @@ donation.each do |d|
                             street_address: FFaker::AddressUS.street_address,
                             street_address_two: FFaker::AddressUS.secondary_address,
                             city: FFaker::AddressUS.city,
-                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_i )
+                            state: FFaker::AddressUS.state,
+                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
 end
