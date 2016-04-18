@@ -20,7 +20,8 @@ class Organization < ActiveRecord::Base
   def init
     if self.organization_addresses
       default_address = self.organization_addresses.first
-      default_address.set_default(true)
+      default_address.default = true
+      default_address.save
     end
   end
 
