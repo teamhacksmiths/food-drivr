@@ -13,6 +13,7 @@ User.create!(name: 'Donor User',
              phone: '+1 123 456 789',
              role_id: 0)
 
+
 # Dummy driver user
 User.create!(name: 'Driver User',
              email: 'driver@hacksmiths.com',
