@@ -1,8 +1,6 @@
 class Organization < ActiveRecord::Base
   belongs_to :user
 
-  after_initialize :init
-
   has_many :organization_addresses
   def default_address
     # Select the first default address or select the first address if no defaults
@@ -14,14 +12,6 @@ class Organization < ActiveRecord::Base
       organization_addresses.first
     else
       nil
-    end
-  end
-
-  def init
-    if self.organization_addresses
-      default_address = self.organization_addresses.first
-      default_address.default = true
-      default_address.save
     end
   end
 
