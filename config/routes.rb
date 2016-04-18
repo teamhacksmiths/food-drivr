@@ -12,10 +12,10 @@ Rails.application.routes.draw do
     # TODO: enforce namespace / versioning: constraints: ApiConstraints.new(version: 1, default: true)
     namespace :v1 do
       resources :users, :only => [:show, :create, :update], param: :auth_token
-      resources :donor do
+      namespace :donor do
         resources :donations, :only => [:create, :update, :destroy]
       end
-      resources :driver, :only => [:index, :show] do
+      namespace :driver do
         resources :dropoffs, :only => [:create, :update, :destroy]
         resources :pickups, :only => [:create, :update, :destroy]
       end

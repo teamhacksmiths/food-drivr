@@ -22,9 +22,13 @@ class Api::V1::DonationsController < ApplicationController
     end
   end
 
+  def build_donation_meta
+
+  end
+
   def update
     donation = current_user.donations.find(params[:id])
-    if donations.update(donation_params)
+    if donation.update(donation_params)
       render json: donation, status: 200, location: [:api_v1, donation]
     else
       render json: { errors: product.errors }, status: 422
@@ -40,7 +44,7 @@ class Api::V1::DonationsController < ApplicationController
   private
 
   def donation_params
-    params.require(:donation).permit(:recipient, :status_id, :description) #TODO: add params for donations
+    params.require(:donation).permit(:id, :description)
   end
 
   # TODO: add a better mechanism for how the recipient is created.
@@ -64,5 +68,8 @@ class Api::V1::DonationsController < ApplicationController
                                    :donation_id, :street_address,
                                    :street_address_two, :city,
                                    :state, :zip)
+  end
+  def donation_types_params
+
   end
 end
