@@ -55,12 +55,28 @@ users = User.all
 orgs = Organization.all
 
 orgs.each do |o|
+
   o.organization_address = OrganizationAddress.create(organization_id: o.id,
                                          street_address: FFaker::AddressUS.street_address,
                                          street_address_two: FFaker::AddressUS.secondary_address,
                                          city: FFaker::AddressUS.city,
                                          state: FFaker::AddressUS.state,
-                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s)
+                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s
+                                         default: true)
+  o.organization_address = OrganizationAddress.create(organization_id: o.id,
+                                         street_address: FFaker::AddressUS.street_address,
+                                         street_address_two: FFaker::AddressUS.secondary_address,
+                                         city: FFaker::AddressUS.city,
+                                         state: FFaker::AddressUS.state,
+                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s
+                                         default: false)
+  o.organization_address = = OrganizationAddress.create(organization_id: o.id,
+                                         street_address: FFaker::AddressUS.street_address,
+                                         street_address_two: FFaker::AddressUS.secondary_address,
+                                         city: FFaker::AddressUS.city,
+                                         state: FFaker::AddressUS.state,
+                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s
+                                         default: false)
 end
 
 users.each do |u|

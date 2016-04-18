@@ -12,7 +12,7 @@ class UserSerializer < ActiveModel::Serializer
     end
   end
   def default_address
-    if  object.organization && object.organization.default_address
+    if object.organization && object.organization.default_address
       object.organization.default_address
     end
   end
