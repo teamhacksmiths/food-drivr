@@ -2,18 +2,6 @@ class Organization < ActiveRecord::Base
   belongs_to :user
 
   has_many :organization_addresses
-  def default_address
-    # Select the first default address or select the first address if no defaults
-    # Exist
-    default = organization_addresses.select{ |p| p.default == true }.first
-    if default
-      default
-    elsif organization_addresses
-      organization_addresses.first
-    else
-      nil
-    end
-  end
 
   def return_address
     if default_address
@@ -26,4 +14,16 @@ class Organization < ActiveRecord::Base
       return_address
     end
   end
+
+  private
+    def default_address
+      # Select the first default address or select the first address if no defaults
+      # Exist
+      default = organization_addresses.select{ |p| p.default == true }.first
+      if default
+        default
+      elsif organization_addresses
+        organization_addresses.first
+      end
+    end
 end

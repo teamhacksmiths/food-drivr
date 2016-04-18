@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :phone, :description, :name, :email, :avatar, :role_id, :settings, :default_address, :organization
+  attributes :id, :phone, :description, :name, :email, :avatar, :role_id, :settings, :default_address
 
   has_one :organization
 
@@ -12,10 +12,8 @@ class UserSerializer < ActiveModel::Serializer
     end
   end
   def default_address
-    if object.organization && object.organization.default_address
-      object.organization.default_address
+    if object.organization && object.organization.return_address
+      object.organization.return_address
     end
-  end
-  def organization
   end
 end
