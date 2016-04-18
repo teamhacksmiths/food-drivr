@@ -12,15 +12,8 @@ class UserSerializer < ActiveModel::Serializer
     end
   end
   def default_address
-    if object.organization && object.organization.organization_address
-      address = object.organization.organization_address
-      return_address = {}
-      return_address[:street_address] = address.street_address.to_s
-      return_address[:street_address_two] = address.street_address_two.to_s
-      return_address[:city] = address.city.to_s
-      return_address[:state] = address.state.to_s
-      return_address[:zip] = address.zip.to_s
-      return_address
+    if  object.organization && object.organization.default_address
+      object.organization.default_address
     end
   end
   def organization

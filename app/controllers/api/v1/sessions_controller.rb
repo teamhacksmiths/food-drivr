@@ -13,7 +13,6 @@ class Api::V1::SessionsController < ApplicationController
       user.generate_authentication_token!
       user.save
       render json: user, serializer: AuthtokenSerializer, status: 200, location: [:api_v1, user]
-
     else
       render json: { errors: "Invalid email or password" }, status: 422
     end
