@@ -12,7 +12,7 @@ class UserSerializer < ActiveModel::Serializer
     end
   end
   def default_address
-    if object.organization.organization_address
+    if object.organization && object.organization.organization_address
       address = object.organization.organization_address
       return_address = {}
       return_address[:street_address] = address.street_address.to_s
