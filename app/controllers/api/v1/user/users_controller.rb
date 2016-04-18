@@ -29,7 +29,7 @@ class Api::V1::UsersController < ApplicationController
   # We need to make sure to safeguard against bad params in the model layer
   def update
     if current_user.update(user_params)
-      render json: user, status: 200, location: [:api_v1, user]
+      render json: current_user, serializer: UserSerializer, status: 200, location: [:api_v1, current_user]
     else
       render json: { errors: user.errors }, status: 422
     end
@@ -39,9 +39,9 @@ class Api::V1::UsersController < ApplicationController
     # User params accepted at this point for creating a user are:
       # name, email, password and password_confirmation
     def user_params
-      params.require(:user).permit(:email, :role_id, :phone, :name, :password, :password_confirmation)
-    end
-    def organization_params
-      params.require(:organization).permit(:name, :address)
+      params.require(:user).permit(
+                          :email, :phone, :name,
+                          :avatar, :password, :password_confirmation,
+                          setting_attributes: [:id, :active, :notifications])
     end
 end
