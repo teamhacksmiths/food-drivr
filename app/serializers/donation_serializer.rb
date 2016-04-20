@@ -19,6 +19,6 @@ class DonationSerializer < ActiveModel::Serializer
     object.donation_types_array
   end
   def status
-
+    object.donation_status if object.donation_status
   end
 end

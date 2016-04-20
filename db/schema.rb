@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417230605) do
+ActiveRecord::Schema.define(version: 20160420201024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,9 +97,17 @@ ActiveRecord::Schema.define(version: 20160417230605) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
+    t.integer  "dropoffstatus_id"
   end
 
   add_index "dropoffs", ["donation_id"], name: "index_dropoffs_on_donation_id", using: :btree
+  add_index "dropoffs", ["dropoffstatus_id"], name: "index_dropoffs_on_dropoffstatus_id", using: :btree
+
+  create_table "dropoffstatuses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "organization_addresses", force: :cascade do |t|
     t.integer  "organization_id"
@@ -138,9 +146,17 @@ ActiveRecord::Schema.define(version: 20160417230605) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
+    t.integer  "pickupstatus_id"
   end
 
   add_index "pickups", ["donation_id"], name: "index_pickups_on_donation_id", using: :btree
+  add_index "pickups", ["pickupstatus_id"], name: "index_pickups_on_pickupstatus_id", using: :btree
+
+  create_table "pickupstatuses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "recipients", force: :cascade do |t|
     t.string   "name"
@@ -158,6 +174,12 @@ ActiveRecord::Schema.define(version: 20160417230605) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "seed_migration_data_migrations", force: :cascade do |t|
+    t.string   "version"
+    t.integer  "runtime"
+    t.datetime "migrated_on"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -209,9 +231,11 @@ ActiveRecord::Schema.define(version: 20160417230605) do
 
   add_foreign_key "donation_images", "donations"
   add_foreign_key "dropoffs", "donations"
+  add_foreign_key "dropoffs", "dropoffstatuses"
   add_foreign_key "organization_addresses", "organizations"
   add_foreign_key "organizations", "users"
   add_foreign_key "pickups", "donations"
+  add_foreign_key "pickups", "pickupstatuses"
   add_foreign_key "settings", "users"
   add_foreign_key "types", "donation_types"
   add_foreign_key "types", "donations"

@@ -1,0 +1,3 @@
+class OrganizationController < ApplicationController
+
+end

@@ -1,3 +1,6 @@
+dropoffstatuses = Dropoffstatus.all
+pickupstatuses = Pickupstatus.all
+
 AdminUser.create!(email: 'admin@example.com',
                   password: 'password',
                   password_confirmation: 'password')
@@ -55,23 +58,24 @@ end
 users = User.all
 orgs = Organization.all
 
-orgs.each do |o|
 
-  o.organization_addresses << OrganizationAddress.create(organization_id: o.id,
+orgs.each do |organization|
+
+  organization.organization_addresses << OrganizationAddress.create(organization_id: organization.id,
                                          street_address: FFaker::AddressUS.street_address,
                                          street_address_two: FFaker::AddressUS.secondary_address,
                                          city: FFaker::AddressUS.city,
                                          state: FFaker::AddressUS.state,
                                          zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
                                          default: true)
-  o.organization_addresses << OrganizationAddress.create(organization_id: o.id,
+  organization.organization_addresses << OrganizationAddress.create(organization_id: organization.id,
                                          street_address: FFaker::AddressUS.street_address,
                                          street_address_two: FFaker::AddressUS.secondary_address,
                                          city: FFaker::AddressUS.city,
                                          state: FFaker::AddressUS.state,
                                          zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
                                          default: false)
-  o.organization_addresses << OrganizationAddress.create(organization_id: o.id,
+  organization.organization_addresses << OrganizationAddress.create(organization_id: organization.id,
                                          street_address: FFaker::AddressUS.street_address,
                                          street_address_two: FFaker::AddressUS.secondary_address,
                                          city: FFaker::AddressUS.city,
@@ -157,4 +161,6 @@ donation.each do |d|
                             city: FFaker::AddressUS.city,
                             state: FFaker::AddressUS.state,
                             zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
+  d.pickup.status = pickupstatuses.sample
+  d.dropoff.status = dropoffstatuses.sample
 end
