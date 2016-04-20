@@ -20,6 +20,9 @@ gem 'pg'
 gem 'mail'
 gem 'postmark'
 
+# Handles database seeding in migration form
+gem 'seed_migration'
+
 # active admin dependencies
 gem 'devise'
 gem 'cancan' # or cancancan
