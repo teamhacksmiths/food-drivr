@@ -3,7 +3,12 @@ class Pickup < ActiveRecord::Base
   belongs_to :pickupstatus
 
   def status
-    Pickupstatus.find(pickupstatus_id).name
+    status_name = Pickupstatus.find(pickupstatus_id).name
+    if status_name
+      status_name
+    else
+      nil
+    end
   end
   def status=(status)
     self.pickupstatus = status
