@@ -12,8 +12,7 @@ docker-compose up
 
 To create and migrate the database, run
 ```
-docker-compose run app rake db:create
-docker-compose run app rake db:migrate
+docker-compose run app rake db:setup
 ```
 which effectively runs these commands within the app container.
 
@@ -22,12 +21,20 @@ To open the running app, run
 open "http://$(docker-machine ip default):3000"
 ```
 
-You will need to periodically run
+### Migrate
+You will need to periodically migrate and seed the db when changes have been made.  Migrations make changes to the db simple.
+Simply run:
 ```
 docker-compose run app rake db:migrate
-docker-compose run app rake rake db:seed
 ```
-When new features have been added.
+When new migrations have been added.
+
+### Seed
+To seed the database, for now, you will need to reset the database and then run the setup.
+```
+rake db:reset
+rake db:setup
+```
 
 Admin interface is viewable from /admin
 using default credentials of
