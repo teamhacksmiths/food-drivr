@@ -163,4 +163,5 @@ donation.each do |d|
                             zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
   d.pickup.status = pickupstatuses.sample
   d.dropoff.status = dropoffstatuses.sample
+  d.save
 end

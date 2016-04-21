@@ -20,6 +20,9 @@ gem 'pg'
 gem 'mail'
 gem 'postmark'
 
+# Enable CORS for development
+gem 'rack-cors'
+
 # Handles database seeding in migration form
 gem 'seed_migration'
 

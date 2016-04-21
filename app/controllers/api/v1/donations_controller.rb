@@ -22,16 +22,12 @@ class Api::V1::DonationsController < ApplicationController
     end
   end
 
-  def build_donation_meta
-
-  end
-
   def update
     donation = current_user.donations.find(params[:id])
     if donation.update(donation_params)
       render json: donation, status: 200, location: [:api_v1, donation]
     else
-      render json: { errors: product.errors }, status: 422
+      render json: { errors: donations.errors }, status: 422
     end
   end
 
@@ -44,7 +40,7 @@ class Api::V1::DonationsController < ApplicationController
   private
 
   def donation_params
-    params.require(:donation).permit(:id, :description)
+    params.require(:donation).permit(:id, :description, :status_id)
   end
 
   # TODO: add a better mechanism for how the recipient is created.
