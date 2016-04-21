@@ -36,6 +36,7 @@ rake db:reset
 rake db:setup
 ```
 
+### Admin Interface
 Admin interface is viewable from /admin
 using default credentials of
 User: admin@example.com
