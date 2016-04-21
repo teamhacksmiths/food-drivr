@@ -24,11 +24,10 @@ module HackathonApi
     config.active_record.raise_in_transactional_callbacks = true
     # config.action_mailer.delivery_method   = :postmark
     # config.action_mailer.postmark_settings = { :api_key => ENV["POSTMARK_API_KEY"] }
-
-    use Rack::Cors do
+    config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'
-        resource '*', headers: :any, methods: :any
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
   end
