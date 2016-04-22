@@ -9,7 +9,7 @@ Role.create!(id: 3, description: 'Unassigned')
 
 # Define donatan status
 DonationStatus.create!(name: 'Pending', id: 0)
-DonationStatus.create!(name: 'Active', id: 1)
+DonationStatus.create!(name: 'Accepted', id: 1)
 DonationStatus.create!(name: 'Completed', id: 2)
 DonationStatus.create!(name: 'Suspended', id: 3)
 DonationStatus.create!(name: 'Cancelled', id: 4)
@@ -20,7 +20,7 @@ Pickupstatus.create!(name: 'Completed', id: 2)
 Pickupstatus.create!(name: 'Suspended', id: 3)
 Pickupstatus.create!(name: 'Cancelled', id: 4)
 
-Dropoffstatus.create(name: 'Pending', id: 0)
+Dropoffstatus.create!(name: 'Pending', id: 0)
 Dropoffstatus.create!(name: 'Accepted', id: 1)
 Dropoffstatus.create!(name: 'Completed', id: 2)
 Dropoffstatus.create!(name: 'Suspended', id: 3)
