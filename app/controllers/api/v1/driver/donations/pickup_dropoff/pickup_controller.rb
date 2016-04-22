@@ -1,4 +1,4 @@
-class Api::V1::Driver::Donations::PickupController < ApplicationController
+class Api::V1::Driver::PickupsController < ApplicationController
   before_action :authenticate_with_token!
   respond_to :json
 

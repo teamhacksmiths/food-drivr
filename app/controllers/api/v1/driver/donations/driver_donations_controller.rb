@@ -28,7 +28,7 @@ class Api::V1::Driver::DonationsController < ApplicationController
   end
 
   def accepted
-
+    donations = Donation.where(status_id: 1)
   end
 
   def completed
