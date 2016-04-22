@@ -16,13 +16,15 @@ Rails.application.routes.draw do
       end
       resources :donor, :only => [:show]
       namespace :donor do
-        resources :donations, :only => [:create, :update, :destroy]
+        resources :donations, :only => [:show, :create, :update, :destroy]
       end
-      resources :driver, :only => [:show]
-      resources :donations, :only => [:show, :index, :update] do
-        resource :dropoff, :only => [:create, :update, :destroy]
-        resource :pickup, :only => [:create, :update, :destroy]
+      namespace :driver do
+        resources :donations, :only => [:index, :show, :create, :update] do
+          resource :dropoff, :only => [:show, :create, :update]
+          resource :pickup, :only => [:show, :create, :update]
+        end
       end
+      resources :donations, :only => [:show, :index, :update]
       resources :sessions, :only => [:create, :destroy]
     end
   end

@@ -23,6 +23,9 @@ gem 'postmark'
 # Enable CORS for development
 gem 'rack-cors'
 
+# Geocode locations
+gem 'geocoder'
+
 # Handles database seeding in migration form
 gem 'seed_migration'
 
