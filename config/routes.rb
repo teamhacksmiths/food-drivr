@@ -21,7 +21,7 @@ Rails.application.routes.draw do
         resources :donations, :only => [:index, :show, :create, :update]
       end
       resources :donations, :only => [:show, :index, :update]
-      get 'pending_donations' => 'donationspending#index'
+      get 'donationspending' => 'donationspending#index'
       resources :sessions, :only => [:create, :destroy]
     end
   end
