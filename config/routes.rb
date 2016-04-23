@@ -15,13 +15,14 @@ Rails.application.routes.draw do
       end
       resources :donor, :only => [:show]
       namespace :donor do
-        resources :donations, :only => [:show, :create, :update, :destroy]
+        get 'donations' => 'donor_donations#index'
       end
       namespace :driver do
-        resources :donations, :only => [:index, :show, :create, :update]
+        get 'donations' => 'driver_donations#index', as: :donations
       end
       resources :donations, :only => [:show, :index, :update]
       get 'donationspending' => 'donationspending#index'
+
       resources :sessions, :only => [:create, :destroy]
     end
   end

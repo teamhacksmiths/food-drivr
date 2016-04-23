@@ -1,15 +1,10 @@
-class Api::V1::Driver::DonationsController < ApplicationController
+class Api::V1::Driver::DriverDonationsController < ApplicationController
   before_action :authenticate_with_token!
   respond_to :json
 
   def index
     donations = current_user.donations.all
-    donations
-  end
-
-  def show
-    donations = current_user.donations.find(params[:id])
-    respond_with donations
+    respond_with donations, serialize: DonationSerializer
   end
 
   def update
