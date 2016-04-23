@@ -1,6 +1,5 @@
 class Api::V1::Driver::DonationsController < ApplicationController
   before_action :authenticate_with_token!
-
   respond_to :json
 
   def index

@@ -18,12 +18,10 @@ Rails.application.routes.draw do
         resources :donations, :only => [:show, :create, :update, :destroy]
       end
       namespace :driver do
-        resources :donations, :only => [:index, :show, :create, :update] do
-          resource :dropoff, :only => [:show, :create, :update]
-          resource :pickup, :only => [:show, :create, :update]
-        end
+        resources :donations, :only => [:index, :show, :create, :update]
       end
       resources :donations, :only => [:show, :index, :update]
+      get 'pending_donations' => 'donationspending#index'
       resources :sessions, :only => [:create, :destroy]
     end
   end

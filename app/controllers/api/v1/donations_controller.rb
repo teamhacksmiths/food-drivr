@@ -39,33 +39,16 @@ class Api::V1::DonationsController < ApplicationController
 
   private
 
-  def donation_params
-    params.require(:donation).permit(:id, :description, :status_id)
-  end
+    def donation_params
+      params.require(:donation).permit(:id, :description, :status_id)
+    end
 
-  # TODO: add a better mechanism for how the recipient is created.
-  def recipient_params
-    params.require(:recipient).permit(:id, :name,
-                                      :estimated, :actual,
-                                      :latitude, :longitude,
-                                      :street_address, :street_address_two,
-                                      :donation_id, :city, :state, :zip)
-  end
-  def pickup_params
-    params.require(:pickup).permit(:estimated, :actual,
-                                   :latitude, :longitude,
-                                   :donation_id, :street_address,
-                                   :street_address_two, :city,
-                                   :state, :zip)
-  end
-  def dropoff_params
-    params.require(:dropoff).permit(:estimated, :actual,
-                                   :latitude, :longitude,
-                                   :donation_id, :street_address,
-                                   :street_address_two, :city,
-                                   :state, :zip)
-  end
-  def donation_types_params
-
+    # TODO: add a better mechanism for how the recipient is created.
+    def recipient_params
+      params.require(:recipient).permit(:id, :name,
+                                        :estimated, :actual,
+                                        :latitude, :longitude,
+                                        :street_address, :street_address_two,
+                                        :donation_id, :city, :state, :zip)
   end
 end
