@@ -1,8 +1,7 @@
-
 Rails.application.routes.draw do
   devise_for :users, skip: [:session,:password,:registration], :controllers => { :omniauth_callbacks => "callbacks" }
 
-  root 'application#index'
+  root 'pages#index'
 
   mount SabisuRails::Engine => "/sabisu_rails"
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -16,13 +15,14 @@ Rails.application.routes.draw do
       end
       resources :donor, :only => [:show]
       namespace :donor do
-        resources :donations, :only => [:create, :update, :destroy]
+        get 'donations' => 'donor_donations#index'
       end
-      resources :driver, :only => [:show]
-      resources :donations, :only => [:show, :index, :update] do
-        resource :dropoff, :only => [:create, :update, :destroy]
-        resource :pickup, :only => [:create, :update, :destroy]
+      namespace :driver do
+        get 'donations' => 'driver_donations#index', as: :donations
       end
+      resources :donations, :only => [:show, :index, :update]
+      get 'donationspending' => 'donationspending#index'
+
       resources :sessions, :only => [:create, :destroy]
     end
   end
