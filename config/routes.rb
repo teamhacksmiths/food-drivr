@@ -1,6 +1,6 @@
 
 Rails.application.routes.draw do
-  devise_for :users, skip: [:session,:password,:registration]
+  devise_for :users, skip: [:session,:password,:registration], :controllers => { :omniauth_callbacks => "callbacks" }
 
   root 'application#index'
 

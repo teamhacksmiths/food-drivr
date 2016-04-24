@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
 
   include Authenticable
   def index
-    render text: "Welcome to the Wast Not Food Taxi API!"
+    render text: "Welcome to the Waste Not Food Taxi API!"
   end
 end
