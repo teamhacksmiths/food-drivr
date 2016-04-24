@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, skip: [:session,:password,:registration]
 
-  root 'application#index'
+  root 'pages#index'
 
   mount SabisuRails::Engine => "/sabisu_rails"
   devise_for :admin_users, ActiveAdmin::Devise.config

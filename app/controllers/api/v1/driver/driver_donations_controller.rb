@@ -4,7 +4,7 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
 
   def index
     donations = current_user.donations.all
-    respond_with donations, serialize: DonationSerializer
+    respond_with donations
   end
 
   def update
