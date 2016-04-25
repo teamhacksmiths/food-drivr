@@ -38,6 +38,8 @@ class Api::V1::DonationsController < ApplicationController
   end
 
   private
+    def create_recipient
+    end
 
     def donation_params
       params.require(:donation).permit(:id, :description, :status_id)
@@ -50,5 +52,5 @@ class Api::V1::DonationsController < ApplicationController
                                         :latitude, :longitude,
                                         :street_address, :street_address_two,
                                         :donation_id, :city, :state, :zip)
-  end
+    end
 end

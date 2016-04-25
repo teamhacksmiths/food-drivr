@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         resources :organization, :only => [:show, :create, :update, :destroy]
       end
       resources :donor, :only => [:show]
+      rescources :driver, :only => [:show]
       namespace :donor do
         get 'donations' => 'donor_donations#index'
       end
