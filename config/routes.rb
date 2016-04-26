@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       end
       namespace :driver do
         get 'donations' => 'driver_donations#index', as: :donations
+        post 'donations/:donation_id/status' => 'donations#status'
       end
       resources :donations, :only => [:show, :index, :update]
       get 'donationspending' => 'donationspending#index'

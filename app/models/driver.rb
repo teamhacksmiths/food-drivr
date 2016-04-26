@@ -10,7 +10,7 @@ class Driver < User
       begin
         @role = Role.find_by_description self.type
       rescue
-        raise "Error setting default role for donor."
+        raise "Error setting default role for driver."
       end
     end
 end
