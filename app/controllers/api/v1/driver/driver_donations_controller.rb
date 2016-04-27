@@ -5,12 +5,10 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
   def index
     @pending_donations = Donation.where(status_id: 0)
     @user_donations = current_user.donations.all
-    @accepted_donations = @user_donations.where(status_id: 1)
-    @completed_donations = @user_donations.where(status_id: 2)
-    @response = { :pending_donations => @pending_donations,
-                  :accepted_donations => @accepted_donations,
-                  :completed_donations => @completed_donations }
-    respond_with @response
+    render json: {
+        donations: [ActiveModel::ArraySerializer.new(@pending_donations, each_serializer: DonationSerializer, root: false),
+                    ActiveModel::ArraySerializer.new(@user_donations, each_serializer: DonationSerializer, root: false)]
+      }
   end
 
   def update
@@ -38,20 +36,32 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
 
 
   def pending
-    donations = Donation.where(status_id: 0)
-    render json: donations, status: 200
+    @pending_donations = Donation.where(status_id: 0)
+
+    render json:{
+        donations: ActiveModel::ArraySerializer.new(@pending_donations, each_serializer: DonationSerializer, root: false)
+      }, status: 200
   end
 
   def accepted
-    donations = current_user.donations.all
-    accepted_donations = donations.where(status_id: 1)
-    render json: accepted_donations, status: 200
+    @donations = current_user.donations.all
+    @accepted_donations = @donations.where(status_id: 1)
+    render json: {
+        donations: ActiveModel::ArraySerializer.new(@accepted_donations, each_serializer: DonationSerializer, root: false)
+      }, status: 200
   end
 
   def completed
-    donations = current_user.donations.all
-    completed_donations = donations.where(status_id: 2)
-    render json: completed_donations, status: 200
+    @donations = current_user.donations.all
+    @completed_donations = @donations.where(status_id: 2)
+    render json: {
+        donations: ActiveModel::ArraySerializer.new(@completed_donations, each_serializer: DonationSerializer, root: false)
+      }, status: 200
+  end
+
+  def cancelled
+    @donations = current_user.donations.all
+    @cancelled_donations = @donations.where(status_id: )
   end
 
   private
