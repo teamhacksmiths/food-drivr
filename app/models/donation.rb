@@ -40,6 +40,7 @@ class Donation < ActiveRecord::Base
       set_default_status
       create_pickup
       create_dropoff
+      create_donation_metum
     end
 
     def set_default_status
@@ -60,7 +61,7 @@ class Donation < ActiveRecord::Base
 
     end
 
-    def set_recipient
-
+    def create_donation_metum
+      self.donation_metum = DonationMetum.create
     end
 end

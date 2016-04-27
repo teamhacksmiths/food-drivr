@@ -5,6 +5,15 @@ class Driver < User
   has_many :pickups, through: :donations
   has_many :dropoffs, through: :donations
 
+  def active
+    self.setting.active
+  end
+
+  def active=(status)
+    self.setting.active = status
+    self.save
+  end
+
   private
     def set_default_role!
       begin

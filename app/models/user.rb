@@ -37,8 +37,8 @@ class User < ActiveRecord::Base
         # Also, need to set the "Type"
       self.role = Role.find(2)
     end
+    set_role_for_type
     set_default_settings
-    set_type_for_role
   end
 
   def set_default_settings
@@ -51,19 +51,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def settings
+    self.setting
+  end
+
   def update_settings(settings = {})
     if self.setting
       self.setting.update(settings)
     end
   end
 
-  def set_type_for_role
-    # Set the default type if the role is donor or driver
-    if self.role && self.role.id < 2
-      self.type = self.role.description
+  def set_role_for_type
+    role = Role.where(description: self.type).first
+    if role
+      self.role = role
     else
-      # Set the default type as unassigned and then call
-      # set_type_for_role
+      # Set unnassigned if the type is not found
       self.role = Role.last
     end
   end
