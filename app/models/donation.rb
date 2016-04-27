@@ -1,6 +1,6 @@
 class Donation < ActiveRecord::Base
 
-  after_initialize :set_default_values
+  before_validation :set_default_values
 
   belongs_to :donor, :class_name => "Donor", :foreign_key => "donor_id"
   belongs_to :driver, :class_name => "Driver", :foreign_key => "driver_id"
@@ -21,6 +21,10 @@ class Donation < ActiveRecord::Base
     Donation.where(status: 0).order(updated_at: :desc)
   end
 
+  def status_name
+    self.status.name ? self.status.name : nil
+  end
+
   def donation_types_array
     array = []
     donation_types.each do |type|
@@ -33,8 +37,31 @@ class Donation < ActiveRecord::Base
 
     # Set the default status when a donation is created.
     def set_default_values
+      set_default_status
+      create_pickup
+      create_dropoff
+      create_donation_metum
+    end
+
+    def set_default_status
       self.status ||= DonationStatus.find(0)
     end
 
+    def create_pickup
+      self.pickup = Pickup.create
+      self.pickup.status = Pickupstatus.first
+    end
 
+    def create_dropoff
+      self.dropoff = Dropoff.create
+      self.dropoff.status = Dropoffstatus.first
+    end
+
+    def create_recipient
+
+    end
+
+    def create_donation_metum
+      self.donation_metum = DonationMetum.create
+    end
 end
