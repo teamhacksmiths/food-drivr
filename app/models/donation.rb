@@ -56,6 +56,10 @@ class Donation < ActiveRecord::Base
       self.dropoff.status = Dropoffstatus.first
     end
 
+    def create_recipient
+
+    end
+
     def set_recipient
 
     end
