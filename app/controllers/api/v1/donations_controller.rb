@@ -22,20 +22,6 @@ class Api::V1::DonationsController < ApplicationController
     end
   end
 
-  def status
-    donation = current_user.donations.find(params[:donation_id])
-    status_hash = donation[:status]
-    if status_hash[:status_id]
-      donation.status = DonationStatus.find(status_hash[:donation_status_id])
-    end
-    if status_hash[:pickup_status_id]
-      donation.pickup.status = Pickupstatus.find(status_hash[:pickup_status_id])
-    end
-    if status_hash[:dropoff_status_id]
-      donation.dropoff.status = Dropoffstatus.find(status_hash[:dropoff_status_id])
-    end
-  end
-
   def update
     donation = current_user.donations.find(params[:id])
     if donation.update(donation_params)
@@ -72,10 +58,5 @@ class Api::V1::DonationsController < ApplicationController
                                         :latitude, :longitude,
                                         :street_address, :street_address_two,
                                         :donation_id, :city, :state, :zip)
-    end
-    def status_params
-      params.require(:donation).permit(:donation_status,
-                                       :pickup_status,
-                                       :dropoff_status)
     end
 end
