@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
 
   # User should have a role_id, although we may want to look into setting
-  # Up seperate classes.
+  # Up separate classes.
   belongs_to :role
 
   def self.from_omniauth(auth)

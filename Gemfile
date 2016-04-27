@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
-
+ruby '2.2.4'
 
 gem 'rails', '4.2.6'
 gem 'sass-rails', '~> 5.0'
@@ -24,7 +23,8 @@ gem 'postmark'
 gem 'rack-cors'
 
 # Geocode locations
-gem 'geocoder'
+gem 'geocoder', '>= 1.3.4'
+gem 'mime-types', '>=2.99.1'
 
 # Handles database seeding in migration form
 gem 'seed_migration'
