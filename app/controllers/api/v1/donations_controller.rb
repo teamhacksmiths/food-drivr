@@ -38,9 +38,17 @@ class Api::V1::DonationsController < ApplicationController
   end
 
   private
+    def create_recipient
+    end
 
     def donation_params
       params.require(:donation).permit(:id, :description, :status_id)
+    end
+
+    def status_params
+      params.require(:status).permit(:donation_status_id,
+                                     :dropoff_status_id,
+                                     :pickup_status_id)
     end
 
     # TODO: add a better mechanism for how the recipient is created.
@@ -50,5 +58,5 @@ class Api::V1::DonationsController < ApplicationController
                                         :latitude, :longitude,
                                         :street_address, :street_address_two,
                                         :donation_id, :city, :state, :zip)
-  end
+    end
 end
