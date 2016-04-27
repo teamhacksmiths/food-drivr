@@ -19,12 +19,13 @@ Rails.application.routes.draw do
         get 'donations' => 'donor_donations#index'
       end
       namespace :driver do
-        get 'donations' => 'driver_donations#index', as: :donations
-        post 'donations/:donation_id/status' => 'donations#status'
+        get 'donations/all' => 'driver_donations#index', as: :donations_all
+        get 'donations/pending' => 'driver_donations#pending', as: :donations_pending
+        get 'donations/completed' => 'driver_donations#completed', as: :donations_completed
+        get 'donations/accepted' => 'driver_donations#accepted', as: :donations_accepted
+        post 'donations/:donation_id/status' => 'driver_donations#status'
       end
       resources :donations, :only => [:show, :index, :update]
-      get 'donationspending' => 'donationspending#index'
-
       resources :sessions, :only => [:create, :destroy]
     end
   end
