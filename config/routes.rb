@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       # resources :driver, :only => [:show]
       namespace :donor do
         get 'donations' => 'donor_donations#index'
+        post 'donations' => 'donor_donations#create'
       end
       namespace :driver do
         get 'status' => 'driver#check_status', as: :check_status
