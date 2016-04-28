@@ -6,6 +6,7 @@ class Dropoff < ActiveRecord::Base
   geocoded_by :address
 
   after_validation :geocode, :if => :address_changed?
+  before_validation :set_default_status
 
   def status
    dropoffstatus
@@ -28,5 +29,11 @@ class Dropoff < ActiveRecord::Base
 
   def status=(status)
     self.dropoffstatus = status
+  end
+
+  def set_default_status
+    if !self.dropoffstatus
+      self.dropoffstatus = Dropoffstatus.first
+    end
   end
 end

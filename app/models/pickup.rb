@@ -5,6 +5,7 @@ class Pickup < ActiveRecord::Base
   geocoded_by :address
 
   after_validation :geocode, :if => :address_changed?
+  before_validation :set_default_status
 
   def status
    pickupstatus
@@ -24,8 +25,9 @@ class Pickup < ActiveRecord::Base
 
   # Create an alias for status name
   def status_name
-    self.status ? self.status.name : nil
+    self.pickupstatus ? self.pickupstatus.name : nil
   end
+
 
   def status=(status)
     self.pickupstatus = status
@@ -35,4 +37,10 @@ class Pickup < ActiveRecord::Base
     "#{self.street_address} #{self.street_address_two} #{self.city} #{self.state} #{self.zip}"
   end
 
+  private
+    def set_default_status
+      if !self.pickupstatus
+        self.pickupstatus = Pickupstatus.first
+      end
+    end
 end

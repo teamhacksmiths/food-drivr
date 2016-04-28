@@ -44,20 +44,20 @@ class Donation < ActiveRecord::Base
     end
 
     def set_default_status
-      self.status ||= DonationStatus.find(0)
+      if !self.status
+        self.status ||= DonationStatus.find(0)
+      end
     end
 
     def create_pickup
       if !self.pickup
         self.pickup = Pickup.create
-        self.pickup.status = Pickupstatus.first
       end
     end
 
     def create_dropoff
       if !self.dropoff
         self.dropoff = Dropoff.create
-        self.dropoff.status = Dropoffstatus.first
       end
     end
 
