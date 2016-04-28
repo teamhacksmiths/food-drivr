@@ -17,3 +17,8 @@
 /tmp
 config/local_env.yml
 .env
+*.lock
+*.log
+
+.idea
+.rspec
