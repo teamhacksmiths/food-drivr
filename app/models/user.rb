@@ -72,11 +72,24 @@ class User < ActiveRecord::Base
   end
 
   def set_role_for_type
-    role = Role.where(description: self.type).first
+    if self.role
+      self.type = self.role.description
+    end
+    user_role = Role.where(description: self.type).first
     if role
       self.role = role
     else
       # Set unnassigned if the type is not found
+      self.role = Role.last
+    end
+  end
+
+  def match_type_to_role
+    if self.role && !self.type
+      self.type = self.role.description
+    elsif !self.role && self.type
+      self.role = Role.where(description: self.type).first
+    elsif !self.role && !self.type
       self.role = Role.last
     end
   end

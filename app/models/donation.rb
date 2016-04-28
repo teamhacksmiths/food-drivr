@@ -48,13 +48,17 @@ class Donation < ActiveRecord::Base
     end
 
     def create_pickup
-      self.pickup = Pickup.create
-      self.pickup.status = Pickupstatus.first
+      if !self.pickup
+        self.pickup = Pickup.create
+        self.pickup.status = Pickupstatus.first
+      end
     end
 
     def create_dropoff
-      self.dropoff = Dropoff.create
-      self.dropoff.status = Dropoffstatus.first
+      if !self.dropoff
+        self.dropoff = Dropoff.create
+        self.dropoff.status = Dropoffstatus.first
+      end
     end
 
     def create_recipient
@@ -62,6 +66,8 @@ class Donation < ActiveRecord::Base
     end
 
     def create_donation_metum
-      self.donation_metum = DonationMetum.create
+      if !self.donation_metum
+        self.donation_metum = DonationMetum.create
+      end
     end
 end

@@ -1,7 +1,7 @@
 class Pickup < ActiveRecord::Base
   has_one :driver, class_name: "User", :through => :donation
   belongs_to :pickupstatus
-
+  belongs_to :donation
   geocoded_by :address
 
   after_validation :geocode, :if => :address_changed?

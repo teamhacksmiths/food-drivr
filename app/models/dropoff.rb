@@ -1,6 +1,7 @@
 class Dropoff < ActiveRecord::Base
   has_one :driver, class_name: "User", through: :donation
   belongs_to :dropoffstatus
+  belongs_to :donation
 
   geocoded_by :address
 
