@@ -5,9 +5,9 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
   def index
     @pending_donations = Donation.where(status_id: 0)
     @user_donations = current_user.donations.all
+    @all_donations = @pending_donations + @user_donations
     render json: {
-        donations: [ActiveModel::ArraySerializer.new(@pending_donations, each_serializer: DonationSerializer, root: false),
-                    ActiveModel::ArraySerializer.new(@user_donations, each_serializer: DonationSerializer, root: false)]
+        donations: ActiveModel::ArraySerializer.new(@all_donations, each_serializer: DonationSerializer, root: false)
       }
   end
 

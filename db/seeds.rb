@@ -7,7 +7,7 @@ Role.create!(id: 1, description: 'Driver')
 Role.create!(id: 2, description: 'Other')
 Role.create!(id: 3, description: 'Unassigned')
 
-# Define donatan status
+# Define donation status
 DonationStatus.create!(name: 'Pending', id: 0)
 DonationStatus.create!(name: 'Accepted', id: 1)
 DonationStatus.create!(name: 'Completed', id: 2)
