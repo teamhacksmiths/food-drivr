@@ -5,9 +5,9 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
   def index
     @pending_donations = Donation.where(status_id: 0)
     @user_donations = current_user.donations.all
+    @all_donations = @pending_donations << @user_donations
     render json: {
-        donations: [ActiveModel::ArraySerializer.new(@pending_donations, each_serializer: DonationSerializer, root: false),
-                    ActiveModel::ArraySerializer.new(@user_donations, each_serializer: DonationSerializer, root: false)]
+        donations: ActiveModel::ArraySerializer.new(_donations, each_serializer: DonationSerializer, root: false)
       }
   end
 
@@ -21,25 +21,41 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
   end
 
   def status
-    @donation = current_user.donations.find(params[:donation_id])
-    if params[:status][:donation_status]
-      @donation.status = DonationStatus.find(params[:status][:donation_status])
+    update = false
+    # Find the donation
+    @donation = Donation.find(params[:donation_id])
+    # If there is no driver set, then create a pickup, setting the status
+    # To accepted for all of the status fields.
+    if @donation.driver == nil
+      @donation.driver = current_user
+      update = true
+    elsif @donation.driver == current_user
+      update = true
     end
-    if params[:status][:pickup_status]
-      @donation.pickup.pickupstatus = Pickupstatus.find(params[:status][:pickup_status])
-      @donation.pickup.save
-    end
-    if params[:status][:dropoff_status]
-      @donation.dropoff.dropoffstatus = Dropoffstatus.find(params[:status][:dropoff_status])
-      @donation.dropoff.save
-    end
-    if @donation.save
-      head 204
+
+    # The only case when we will not update is when there is a driver set
+      # but it is not the current user.
+    if update == true
+      if params[:status][:donation_status]
+        @donation.status = DonationStatus.find(params[:status][:donation_status])
+      end
+      if params[:status][:pickup_status]
+        @donation.pickup.pickupstatus = Pickupstatus.find(params[:status][:pickup_status])
+        @donation.pickup.save
+      end
+      if params[:status][:dropoff_status]
+        @donation.dropoff.dropoffstatus = Dropoffstatus.find(params[:status][:dropoff_status])
+        @donation.dropoff.save
+      end
+      if @donation.save
+        head 204
+      else
+        head 422
+      end
     else
-      head 422
+      head 403
     end
   end
-
 
   def pending
     @pending_donations = Donation.where(status_id: 0)
