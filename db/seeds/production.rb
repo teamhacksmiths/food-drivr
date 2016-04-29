@@ -109,7 +109,8 @@ end
 donors = Donor.all
 drivers = Driver.all
 recipients = Recipient.all
-statuses = DonationStatus.all
+statuses = DonationStatus.last(4)
+pending = DonationStatus.first
 types = DonationType.all
 
 
@@ -122,6 +123,14 @@ types = DonationType.all
 
 end
 
+## Create pending donations
+20.times do |n|
+  Donation.create!(donor: donors.sample,
+                   recipient: recipients.sample,
+                   description: FFaker::HipsterIpsum.phrase,
+                   status: pending)
+end
+
 # Create sample of types for donations
 donation = Donation.all
 
@@ -132,13 +141,16 @@ types.each do |t|
 end
 
 donation.each do |d|
-  # make sure that we are creating truly unique types
+  # Make sure that we are creating truly unique types
   local_ids = donation_type_ids
   type_id = local_ids.sample
   Type.create!(donation_id: d.id, donation_type_id: type_id)
   local_ids.delete type_id
   next_type_id = local_ids.sample
   Type.create!(donation_id: d.id, donation_type_id: next_type_id)
+  local_ids.delete next_type_id
+  last_type_id = local_ids.sample
+  Type.create!(donation_id: d.id, donation_type_id: last_type_id)
 
   d.pickup = Pickup.create(estimated: FFaker::Time.date,
                            actual: FFaker::Time.date,
@@ -151,17 +163,25 @@ donation.each do |d|
                            state: FFaker::AddressUS.state,
                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
 
-   d.dropoff = Dropoff.create(estimated: FFaker::Time.date,
-                            actual: FFaker::Time.date,
-                            donation_id: d.id,
-                            latitude: FFaker::Geolocation.lat,
-                            longitude: FFaker::Geolocation.lng,
-                            street_address: FFaker::AddressUS.street_address,
-                            street_address_two: FFaker::AddressUS.secondary_address,
-                            city: FFaker::AddressUS.city,
-                            state: FFaker::AddressUS.state,
-                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
-  d.pickup.status = pickupstatuses.sample
-  d.dropoff.status = dropoffstatuses.sample
+    d.dropoff = Dropoff.create(estimated: FFaker::Time.date,
+                              actual: FFaker::Time.date,
+                              donation_id: d.id,
+                              latitude: FFaker::Geolocation.lat,
+                              longitude: FFaker::Geolocation.lng,
+                              street_address: FFaker::AddressUS.street_address,
+                              street_address_two: FFaker::AddressUS.secondary_address,
+                              city: FFaker::AddressUS.city,
+                              state: FFaker::AddressUS.state,
+                              zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
+  # If the status is not pending, then sample from the pickup and dropoff statuses.
+  if d.status_name != "Pending"
+    d.pickup.status = pickupstatuses.sample
+    d.dropoff.status = dropoffstatuses.sample
+  else
+    # If the donation is pending, make sure the status is pending.
+    d.pickup.status = pickupstatus.first
+    d.dropoff.status = dropoffstatus.first
+  end
+
   d.save
 end
