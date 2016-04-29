@@ -179,8 +179,8 @@ donation.each do |d|
     d.dropoff.status = dropoffstatuses.sample
   else
     # If the donation is pending, make sure the status is pending.
-    d.pickup.status = pickupstatus.first
-    d.dropoff.status = dropoffstatus.first
+    d.pickup.status = pickupstatuses.first
+    d.dropoff.status = dropoffstatuses.first
   end
 
   d.save
