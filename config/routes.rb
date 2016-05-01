@@ -40,7 +40,7 @@ Rails.application.routes.draw do
         post 'donations/:donation_id/status' => 'driver_donations#status'
       end
       resources :donations, :only => [:show, :index, :update]
-      resources :sessions, :only => [:create, :destroy]
+      resources :sessions, :only => [:create, :destroy], param: :auth_token
     end
   end
 end
