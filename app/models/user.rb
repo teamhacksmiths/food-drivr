@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:twitter,:facebook]
+         :omniauthable, :omniauth_providers => [:twitter, :facebook]
 
   before_create :generate_authentication_token!
   after_initialize :set_defaults
