@@ -101,7 +101,7 @@ end
 end
 
 
-10.times do |n|
+40.times do |n|
   DonationType.create(description: FFaker::Food.fruit)
 end
 
@@ -132,7 +132,7 @@ end
 end
 
 # Create sample of types for donations
-donation = Donation.all
+donations = Donation.all
 
 # Loop through and create an array of type_ids
 donation_type_ids = []
@@ -140,21 +140,21 @@ types.each do |t|
   donation_type_ids << t.id
 end
 
-donation.each do |d|
+donations.each do |donation|
   # Make sure that we are creating truly unique types
   local_ids = donation_type_ids
   type_id = local_ids.sample
-  Type.create!(donation_id: d.id, donation_type_id: type_id)
+  Type.create!(donation_id: donation.id, donation_type_id: type_id)
   local_ids.delete type_id
   next_type_id = local_ids.sample
-  Type.create!(donation_id: d.id, donation_type_id: next_type_id)
+  Type.create!(donation_id: donation.id, donation_type_id: next_type_id)
   local_ids.delete next_type_id
   last_type_id = local_ids.sample
-  Type.create!(donation_id: d.id, donation_type_id: last_type_id)
+  Type.create!(donation_id: donation.id, donation_type_id: last_type_id)
 
-  d.pickup = Pickup.create(estimated: FFaker::Time.date,
+  donation.pickup = Pickup.create(estimated: FFaker::Time.date,
                            actual: FFaker::Time.date,
-                           donation_id: d.id,
+                           donation_id: donation.id,
                            latitude: FFaker::Geolocation.lat,
                            longitude: FFaker::Geolocation.lng,
                            street_address: FFaker::AddressUS.street_address,
@@ -163,9 +163,9 @@ donation.each do |d|
                            state: FFaker::AddressUS.state,
                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
 
-    d.dropoff = Dropoff.create(estimated: FFaker::Time.date,
+    donation.dropoff = Dropoff.create(estimated: FFaker::Time.date,
                               actual: FFaker::Time.date,
-                              donation_id: d.id,
+                              donation_id: donation.id,
                               latitude: FFaker::Geolocation.lat,
                               longitude: FFaker::Geolocation.lng,
                               street_address: FFaker::AddressUS.street_address,
@@ -174,14 +174,14 @@ donation.each do |d|
                               state: FFaker::AddressUS.state,
                               zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
   # If the status is not pending, then sample from the pickup and dropoff statuses.
-  if d.status_name != "Pending"
-    d.pickup.status = pickupstatuses.sample
-    d.dropoff.status = dropoffstatuses.sample
+  if donation.status_name != "Pending"
+    donation.pickup.status = pickupstatuses.sample
+    donation.dropoff.status = dropoffstatuses.sample
   else
     # If the donation is pending, make sure the status is pending.
-    d.pickup.status = pickupstatuses.first
-    d.dropoff.status = dropoffstatuses.first
+    donation.pickup.status = pickupstatuses.first
+    donation.dropoff.status = dropoffstatuses.first
   end
 
-  d.save
+  donation.save
 end
