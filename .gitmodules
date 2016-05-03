@@ -1,3 +1,6 @@
 [submodule "client"]
 	path = client
 	url = https://github.com/teamhacksmiths/food-drivr-frontend
+[submodule "ios-app"]
+	path = ios-app
+	url = https://github.com/teamhacksmiths/food-drivr-ios
