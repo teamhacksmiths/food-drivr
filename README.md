@@ -1,9 +1,29 @@
-Hackathon for Hunger Backend
+![Hacksmiths Logo](https://github.com/teamhacksmiths/food-drivr-backend/.github/assets/hacksmiths-logo.svg)
+
+# Food Drivr - Made with ❤️ by [Hacksmiths](http://hacksmiths.io)
+
+## About
+The [Food Drivr](http://fooddrivr.com) web and mobile app serves to make it dead simple to donate edible food to the hungry.  Open the app, press a button and a driver will come pick it up, bringing it to the less fortunate.
+
+The [Hacksmiths](http://hacksmiths.io) are working with a charitable organization called the Waste Not Food Taxi in an effort to facilitate their philanthropic work through the creation of software.  The Waste Not Food Taxi provides a service to shuttle donated food in the city of Portland.
+
+## Technical Info
+[Rails API](https://github.com/teamhacksmiths/food-drivr-backend)
+[iOS Mobile App](https://github.com/teamhacksmiths/food-drivr-ios)
+[React Front End](https://github.com/teamhacksmiths/food-drivr-frontend)
+
+## Links
+[Asana Project Management / Ticketing](https://app.asana.com/0/94684923468934)
+[Specifications](https://docs.google.com/document/d/1JCQDv0QcZB6NGKWcgWc3PVjYTCLtYUbnEOlyPy5f7ZA/edit?usp=sharing)
+[API Documentation](http://teamhacksmiths.github.io/food-drivr-api-documentation/)
+[Entity Relationship Diagrams](https://www.lucidchart.com/documents/view/04f97352-911c-45c8-8fd2-cf457c40f7d2)
 
 ## Getting Started
 
+Note: for instructions for the iOS App and ReactJS Front End, please see the README.md located in their respective repositories (linked above).
+
 ### Installing with Docker
-This app was setup using the heroku docker box.  The build process is automated using docker-compose.
+This app was setup using the Heroku docker box.  The build process is automated using docker-compose.
 
 Install the Docker toolbox and then run
 ```
