@@ -7,16 +7,19 @@ The [Food Drivr](http://fooddrivr.com) web and mobile app serves to make it dead
 
 The [Hacksmiths](http://hacksmiths.io) are working with a charitable organization called the Waste Not Food Taxi in an effort to facilitate their philanthropic work through the creation of software.  The Waste Not Food Taxi provides a service to shuttle donated food in the city of Portland.
 
-## Technical Info
-[Rails API](https://github.com/teamhacksmiths/food-drivr-backend)
-[iOS Mobile App](https://github.com/teamhacksmiths/food-drivr-ios)
-[React Front End](https://github.com/teamhacksmiths/food-drivr-frontend)
+## Release Status
+
+|          | [Rails API](https://github.com/teamhacksmiths/food-drivr-backend) | [iOS Mobile App](https://github.com/teamhacksmiths/food-drivr-ios) | [React Front End](https://github.com/teamhacksmiths/food-drivr-frontend) |
+|----------|-------------------------------------------------------------------|--------------------------------------------------------------------|--------------------------------------------------------------------------|
+| Version  | 0.1.0 Alpha                                                       | 0.1.0 Alpha                                                        | 0.1.0 Alpha                                                              |
+| Status   | In Development                                                    | In Development                                                     | In Development                                                           |
+| Progress | 90%                                                               | 90%                                                                | 90%                                                                      |
 
 ## Links
-[Asana Project Management / Ticketing](https://app.asana.com/0/94684923468934)
-[Specifications](https://docs.google.com/document/d/1JCQDv0QcZB6NGKWcgWc3PVjYTCLtYUbnEOlyPy5f7ZA/edit?usp=sharing)
-[API Documentation](http://teamhacksmiths.github.io/food-drivr-api-documentation/)
-[Entity Relationship Diagrams](https://www.lucidchart.com/documents/view/04f97352-911c-45c8-8fd2-cf457c40f7d2)
+* [Asana Project Management / Ticketing](https://app.asana.com/0/94684923468934)
+* [Specifications](https://docs.google.com/document/d/1JCQDv0QcZB6NGKWcgWc3PVjYTCLtYUbnEOlyPy5f7ZA/edit?usp=sharing)
+* [API Documentation](http://teamhacksmiths.github.io/food-drivr-api-documentation/)
+* [Entity Relationship Diagrams](https://www.lucidchart.com/documents/view/04f97352-911c-45c8-8fd2-cf457c40f7d2)
 
 ## Getting Started
 
@@ -88,15 +91,27 @@ The app will be deployed to Heroku.  Instructions for doing so can be found [at 
 ## Built With
 Ruby on Rails
 
-## Authors
+## Collaborators
 
-* **Ryan Collins**
-* **David Harris**
-* **Peter James Bernante**
-* **Kevin Windisch**
+#### Backend Ruby on Rails API & Admin Dashboard
+* Ryan Collins - [RyanCCollins](https://github.com/RyanCCollins)
+* Deanna Wagner - [DeannaWagner](https://github.com/DeannaWagner)
+* Peter James Bernante - [elbernante](https://github.com/elbernante)
+
+#### iOS
+* Ian Gristock - [gristoi](https://github.com/gristoi)
+* David Fierstein - [davidiad](https://github.com/davidiad)
+* Ivan Lares - [ivanlares](https://github.com/ivanlares)
+* Harry Merzin - [hmerzin](https://github.com/hmerzin)
+
+#### Front End
+* Frank Robert - [OfficialPhrank](https://github.com/OfficialPhrank)
+* Gabriele Cimato - [Gabri3l](https://github.com/Gabri3l)
+* Jake Bryan - [bryanj4](https://github.com/bryanj4)
+
+#### Design
+* Sean Craig - [swhc1066](https://github.com/swhc1066)
+
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.  Anyone anywhere can feel free to clone this repo to use for the purposes of streamlining their food donations.
-
-## Acknowledgments
-Thanks to all the wonderful participants!
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.  Anyone, anywhere, can use this software free of charge, provided they follow the licensing terms. Got a great use for it?  [let us know!](mailto:admin@hackmiths.io)
