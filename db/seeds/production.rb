@@ -141,7 +141,7 @@ types.each do |t|
 end
 
 def unique_donation_type_id
-  type_id = donation_type_ids.sample
+  type_id = $donation_type_ids.sample
   $donation_type_ids.delete type_id
   type_id
 end
