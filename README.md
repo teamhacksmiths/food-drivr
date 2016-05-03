@@ -1,4 +1,4 @@
-![Hacksmiths Logo](https://github.com/teamhacksmiths/food-drivr-backend/blob/master/.github/assets/hacksmiths-logo.svg)
+![Hacksmiths Logo](https://rawgit.com/teamhacksmiths/food-drivr-backend/master/.github/assets/hacksmiths-logo.svg)
 
 # Food Drivr - Made with ❤️ by [Hacksmiths](http://hacksmiths.io)
 
