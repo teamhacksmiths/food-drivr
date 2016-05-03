@@ -135,14 +135,14 @@ end
 donations = Donation.all
 
 # Loop through and create an array of type_ids
-donation_type_ids = []
+$donation_type_ids = []
 types.each do |t|
-  donation_type_ids << t.id
+  $donation_type_ids << t.id
 end
 
 def unique_donation_type_id
   type_id = donation_type_ids.sample
-  donation_type_ids.delete type_id
+  $donation_type_ids.delete type_id
   type_id
 end
 
