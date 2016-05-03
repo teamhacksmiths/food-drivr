@@ -101,7 +101,7 @@ end
 end
 
 
-40.times do |n|
+500.times do |n|
   DonationType.create(description: FFaker::Food.fruit)
 end
 
@@ -153,7 +153,6 @@ donations.each do |donation|
   local_ids.delete next_type_id
   last_type_id = local_ids.sample
   Type.create!(donation_id: donation.id, donation_type_id: last_type_id)
-
   # Create a pickup for the donation
   donation.pickup = Pickup.create(estimated: FFaker::Time.date,
                            actual: FFaker::Time.date,
