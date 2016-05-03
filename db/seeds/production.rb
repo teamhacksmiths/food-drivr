@@ -140,8 +140,10 @@ types.each do |t|
   donation_type_ids << t.id
 end
 
+
+# Loop through the donations, creating all related models
 donations.each do |donation|
-  # Make sure that we are creating truly unique types
+  # Create 3 unique types for each donation
   local_ids = donation_type_ids
   type_id = local_ids.sample
   Type.create!(donation_id: donation.id, donation_type_id: type_id)
@@ -152,6 +154,7 @@ donations.each do |donation|
   last_type_id = local_ids.sample
   Type.create!(donation_id: donation.id, donation_type_id: last_type_id)
 
+  # Create a pickup for the donation
   donation.pickup = Pickup.create(estimated: FFaker::Time.date,
                            actual: FFaker::Time.date,
                            donation_id: donation.id,
@@ -163,6 +166,7 @@ donations.each do |donation|
                            state: FFaker::AddressUS.state,
                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
 
+    # Create a dropoff for the donation.
     donation.dropoff = Dropoff.create(estimated: FFaker::Time.date,
                               actual: FFaker::Time.date,
                               donation_id: donation.id,
@@ -183,5 +187,6 @@ donations.each do |donation|
     donation.dropoff.status = dropoffstatuses.first
   end
 
+  # Finally, once all fields are set, save the donation
   donation.save
 end
