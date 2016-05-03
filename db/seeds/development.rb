@@ -140,20 +140,19 @@ types.each do |t|
   donation_type_ids << t.id
 end
 
+def unique_donation_type_id
+  type_id = donation_type_ids.sample
+  donation_type_ids.delete type_id
+  type_id
+end
 
 # Loop through the donations, creating all related models
 donations.each do |donation|
   # Create 3 unique types for each donation
-  local_ids = donation_type_ids
-  type_id = local_ids.sample
-  Type.create!(donation_id: donation.id, donation_type_id: type_id)
-  local_ids.delete type_id
-  next_type_id = local_ids.sample
-  Type.create!(donation_id: donation.id, donation_type_id: next_type_id)
-  local_ids.delete next_type_id
-  last_type_id = local_ids.sample
-  Type.create!(donation_id: donation.id, donation_type_id: last_type_id)
-  # Create a pickup for the donation
+  Type.create!(donation_id: donation.id, donation_type_id: unique_donation_type_id)
+  Type.create!(donation_id: donation.id, donation_type_id: unique_donation_type_id)
+  Type.create!(donation_id: donation.id, donation_type_id: unique_donation_type_id)
+
   donation.pickup = Pickup.create(estimated: FFaker::Time.date,
                            actual: FFaker::Time.date,
                            donation_id: donation.id,
