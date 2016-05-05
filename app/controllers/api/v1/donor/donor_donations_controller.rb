@@ -6,5 +6,9 @@ class Api::V1::Donor::DonorDonationsController < ApplicationController
     respond_with current_user.donations.all
   end
   def create
+    current_user.donations.build(donation_params)
   end
+  private
+    def donation_params
+    end
 end
