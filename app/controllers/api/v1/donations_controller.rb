@@ -38,11 +38,9 @@ class Api::V1::DonationsController < ApplicationController
   end
 
   private
-    def create_recipient
-    end
 
     def donation_params
-      params.require(:donation).permit(:description, :donation_types)
+      params.require(:donation).permit(:description, :donation_types, :donation_meta)
     end
 
     def status_params
