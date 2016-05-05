@@ -1,5 +1,4 @@
 class Donation < ActiveRecord::Base
-
   before_validation :set_default_values
 
   belongs_to :donor, :class_name => "Donor", :foreign_key => "donor_id"
