@@ -90,6 +90,35 @@ users.each do |u|
 end
 
 
+donors = Donor.all
+
+# Create addresses for the donor
+donors.each do |donor|
+  donor.addresses << DonorAddress.create(donor_id: donor.id,
+                                         street_address: FFaker::AddressUS.street_address,
+                                         street_address_two: FFaker::AddressUS.secondary_address,
+                                         city: FFaker::AddressUS.city,
+                                         state: FFaker::AddressUS.state,
+                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
+                                         default: true)
+
+ donor.addresses << DonorAddress.create(donor_id: donor.id,
+                                        street_address: FFaker::AddressUS.street_address,
+                                        street_address_two: FFaker::AddressUS.secondary_address,
+                                        city: FFaker::AddressUS.city,
+                                        state: FFaker::AddressUS.state,
+                                        zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
+                                        default: false)
+
+donor.addresses << DonorAddress.create(donor_id: donor.id,
+                                       street_address: FFaker::AddressUS.street_address,
+                                       street_address_two: FFaker::AddressUS.secondary_address,
+                                       city: FFaker::AddressUS.city,
+                                       state: FFaker::AddressUS.state,
+                                       zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
+                                       default: false)
+end
+
 # Dummy recipients
 100.times do |n|
   Recipient.create!(name: FFaker::Company.name,
