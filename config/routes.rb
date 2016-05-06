@@ -16,11 +16,13 @@ Rails.application.routes.draw do
         resources :organization, :only => [:show, :create, :update, :destroy]
       end
 
-      resources :donor, :only => [:show, :update], param: :auth_token
+      #resources :donor, :only => [:show, :update], param: :auth_token
 
       namespace :donor do
-        get 'donations' => 'donor_donations#index'
-        post 'donations' => 'donor_donations#create'
+        get 'donations' => 'donor_donations#index', as: :donor_donations
+        get 'donations/:id' => 'donor_donations#show'
+        post 'donations/:id' => 'donor_donations#create'
+        patch 'donations/:id' => 'donor_donations#update'
       end
 
       # The driver namespace allows for convenience routes for most Driver actions
@@ -28,7 +30,7 @@ Rails.application.routes.draw do
         # Status endpoint will get the status of a pending driver, before they are activated.
         get 'status' => 'driver#check_status', as: :check_status
         # Get all donations, ALL Pending and ALL attached to a driver as an array
-        get 'donations/all' => 'driver_donations#index', as: :donations_all\
+        get 'donations/all' => 'driver_donations#index', as: :donations_all
         # Get ALL pending donations
         get 'donations/pending' => 'driver_donations#pending', as: :donations_pending
         # Get a list of donations that were completed by the current driver
