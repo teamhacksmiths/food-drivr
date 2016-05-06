@@ -1,5 +1,6 @@
 class Api::V1::DonorController < ApplicationController
   before_action :authenticate_with_token!
+  
   def show
     current_donor = Donor.find_by(auth_token: params[:auth_token])
     if current_donor
