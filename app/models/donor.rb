@@ -3,6 +3,8 @@ class Donor < User
 
   has_many :donations, foreign_key: "donor_id", class_name: "Donation"
 
+  has_many :addresses, foreign_key: "donor_id", class_name: "DonorAddress"
+
   private
     # Set the default role to be equal to the type
     def set_default_role!

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428175144) do
+ActiveRecord::Schema.define(version: 20160506194012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 20160428175144) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "quantity"
+    t.string   "unit"
   end
 
   create_table "donations", force: :cascade do |t|
@@ -83,6 +85,19 @@ ActiveRecord::Schema.define(version: 20160428175144) do
     t.integer  "status_id"
     t.string   "description"
   end
+
+  create_table "donor_addresses", force: :cascade do |t|
+    t.string   "street_address"
+    t.string   "street_address_two"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "donor_id"
+  end
+
+  add_index "donor_addresses", ["donor_id"], name: "index_donor_addresses_on_donor_id", using: :btree
 
   create_table "dropoffs", force: :cascade do |t|
     t.datetime "estimated"
