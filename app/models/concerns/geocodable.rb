@@ -73,6 +73,15 @@ module Geocodable
     [latitude, longitude].compact.join(', ')
   end
 
+  # Convenience for creating a hash from the latitude and longitude
+  # Making it easy to set location from a hash
+  def location_hash
+    hash = {}
+    hash[:latitude] = self.latitude if self.latitude
+    hash[:longitude] = self.longitude if self.longitude
+    hash
+  end
+
   # Convenience for changing the location (lat / long) via an options hash
   # @params Options Hash
   def location=(opts={})

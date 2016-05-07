@@ -18,6 +18,8 @@ class Donation < ActiveRecord::Base
 
   has_many :images, :class_name => "DonationImage"
 
+  accepts_nested_attributes_for :items
+
   def self.most_recent
     Donation.where(status: 0).order(updated_at: :desc)
   end
@@ -34,13 +36,20 @@ class Donation < ActiveRecord::Base
     array
   end
 
+  # automatically select the closest recipient
+  # NOTE: until the site goes live, this may not work due to the fact
+  # that our seed data is being generated totally randomly now
   def select_recipient
     if pickup.address != nil || pickup.location != nil
       pickup_location = pickup.address || pickup.location
       closest_recipients = Recipient.all.near(pickup_location)
       if closest_recipients && !self.recipient
-        self.recipient = closest_recipients.first
-        self.dropoff.location = recipient.location
+        # NOTE: IN PRODUCTION PLEASE REMOVE THE Recipient.all.sample
+        self.recipient = closest_recipients.first || Recipient.all.sample
+        if self.recipient.location != nil
+          recipient_location = self.recipient.location_hash
+          self.dropoff.location = recipient_location
+        end
       end
     end
   end

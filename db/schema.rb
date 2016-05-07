@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20160507210938) do
 
   create_table "donation_items", force: :cascade do |t|
     t.string   "description"
-    t.integer  "quanity"
+    t.integer  "quantity"
     t.string   "unit"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
