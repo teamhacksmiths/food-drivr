@@ -178,6 +178,20 @@ end
 # Loop through the donations, creating all related models
 donations.each do |donation|
   # Create 3 unique types for each donation
+
+  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+                      unit: FFaker::UnitEnglish::mass_abbr quantity: [1..400].sample)
+  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+                      unit: FFaker::UnitEnglish::mass_abbr quantity: [1..400].sample)
+  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+                      unit: FFaker::UnitEnglish::mass_abbr quantity: [1..400].sample)
+  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+                      unit: FFaker::UnitEnglish::mass_abbr quantity: [1..400].sample)
+  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+                      unit: FFaker::UnitEnglish::mass_abbr quantity: [1..400].sample)
+  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+                      unit: FFaker::UnitEnglish::mass_abbr quantity: [1..400].sample)
+
   Type.create!(donation_id: donation.id, donation_type_id: unique_donation_type_id)
   Type.create!(donation_id: donation.id, donation_type_id: unique_donation_type_id)
   Type.create!(donation_id: donation.id, donation_type_id: unique_donation_type_id)

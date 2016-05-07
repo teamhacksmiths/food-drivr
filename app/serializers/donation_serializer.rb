@@ -4,8 +4,7 @@ class DonationSerializer < ActiveModel::Serializer
   has_one :dropoff
   has_one :recipient
 
-  has_many :donation_types
-
+  has_many :items
   has_many :images
 
   def status

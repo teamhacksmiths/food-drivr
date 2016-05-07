@@ -43,7 +43,7 @@ class Api::V1::Donor::DonorDonationsController < ApplicationController
   private
 
     def donation_params
-      params.require(:donation).permit(:description, :donation_types, :pickup_location, :donation_meta)
+      params.require(:donation).permit(:description, :items, :pickup_location, :donation_meta)
     end
 
 end

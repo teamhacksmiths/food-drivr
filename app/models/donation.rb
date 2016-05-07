@@ -14,6 +14,8 @@ class Donation < ActiveRecord::Base
   has_many :types
   has_many :donation_types, through: :types
 
+  has_many :items, :class_name => "DonationItem", :foreign_key => "donation_id"
+
   has_many :images, :class_name => "DonationImage"
 
   def self.most_recent
