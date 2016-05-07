@@ -7,7 +7,7 @@ class Donor < User
   # Returns the first of addresses where default is true
   # @params
   # @return Either the first default address or the first address if there is
-  # No default address
+    # No default address
   def default_address
     default_addresses = self.addresses.where(default: true)
     if default_addresses == nil

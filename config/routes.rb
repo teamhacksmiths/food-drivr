@@ -19,9 +19,9 @@ Rails.application.routes.draw do
       #resources :donor, :only => [:show, :update], param: :auth_token
 
       namespace :donor do
-        get 'donations' => 'donor_donations#index', as: :donor_donations
+        get 'donations' => 'donor_donations#index', as: :donor_donations_all
+        post 'donations' => 'donor_donations#create', as: :donor_donations_create
         get 'donations/:id' => 'donor_donations#show'
-        post 'donations/:id' => 'donor_donations#create'
         patch 'donations/:id' => 'donor_donations#update'
       end
 

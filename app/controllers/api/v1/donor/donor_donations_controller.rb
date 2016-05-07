@@ -12,7 +12,17 @@ class Api::V1::Donor::DonorDonationsController < ApplicationController
 
   def create
     donation = current_user.donations.build(donation_params)
-    if donation.save
+    donation.save
+    if params[:donation][:pickup_location] != nil
+      @location = params[:donation][:pickup_location]
+      @latitude = @location[:latitude].to_f
+      @longitude = @location[:longitude].to_f
+      location_hash = { :longitude => @longitude, :latitude => @latitude  }
+      donation.pickup.location = location_hash
+    elsif current_user.default_address != nil
+      donation.pickup.address = current_user.default_address
+    end
+    if donation.save && donation.pickup.save
       render json: donation, status: 201, location: [:api_v1, donation]
     else
       render json: { errors: donation.errors }, status: 422

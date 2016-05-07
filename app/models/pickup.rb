@@ -6,8 +6,9 @@ class Pickup < ActiveRecord::Base
   # Map the reverse geocoded results back from the geocoder to object.
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
-      obj.street_address = geo.address
+      obj.street_address = geo.street_address
       obj.city    = geo.city
+      obj.state = geo.state
       obj.zip = geo.postal_code
       obj.country_code = geo.country_code
     end
@@ -24,8 +25,7 @@ class Pickup < ActiveRecord::Base
   end
 
   # Convenience for updation address based on hash values.
-  def address=(address)
-
+  def address=(opts={})
     self.street_address = opts[:street_address] if opts[:street_address]
     self.street_address_two = opts[:street_address_two] if opts[:street_address_two]
     self.city = opts[:city] if opts[:city]
