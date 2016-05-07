@@ -10,7 +10,7 @@ class Donor < User
     # No default address
   def default_address
     default_addresses = self.addresses.where(default: true)
-    if default_addresses == nil
+    if default_addresses.count == 0
       self.addresses.first
     else
       default_addresses.first
