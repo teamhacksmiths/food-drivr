@@ -27,7 +27,7 @@ module Geocodable
     # Set parameters for geocoding and add the hook to geocode / reverse geocode
     geocoded_by :address
     after_validation :geocode, :if => :address_changed?
-
+    after_validation :reverse_geocode, :if => :location_changed?
     # Map the reverse geocoded results back from the geocoder to object.
     reverse_geocoded_by :latitude, :longitude do |obj,results|
       if geo = results.first
@@ -38,40 +38,59 @@ module Geocodable
         obj.country_code = geo.country_code
       end
     end
-    after_validation :reverse_geocode, :if => :location_changed?
   end
 
+  # Convenience for determing if any address components have changed
+  # @return true / false
   def address_changed?
     street_address_changed? || street_address_two_changed? || city_changed? || zip_changed?
   end
 
   # Determine if the latitude or longitude has changed if any of the fields have changed
     # which will set the reverse geocoder to work.
+  # @return true / false
   def location_changed?
     latitude_changed? || longitude_changed?
   end
 
+  # Get the full street address in string format
+  # @return Full Street Address string
+  #
+  # EXAMPLE
+  # "123 Main St., Springfield, MA, 02122, US"
+  #
   def address
     [street_address, street_address_two, city, state, zip, country_code].compact.join(', ')
   end
 
+  # Get the location in string format joined by a comma
+  # @return "Latitude, Longitude" Full Location string, seperated by comma
+  #
+  # EXAMPLE:
+  # "39.33442, 70.33343"
+  #
   def location
     [latitude, longitude].compact.join(', ')
   end
 
   # Convenience for changing the location (lat / long) via an options hash
+  # @params Options Hash
   def location=(opts={})
     self.latitude = opts[:latitude]
     self.longitude = opts[:longitude]
   end
 
-  # Convenience for updation address based on hash values.
+  # Convenience for altering address based on hash values.
+  # @params Options Hash with full street address components
+  # EXAMPLE: { street_address: "123 Main St.", street_address_two: "Apt. 1",
+  #            city: "Springfield", state: "MA", zip: "21111", country_code: "US" }
   def address=(opts={})
     self.street_address = opts[:street_address] if opts[:street_address]
     self.street_address_two = opts[:street_address_two] if opts[:street_address_two]
     self.city = opts[:city] if opts[:city]
     self.state = opts[:state] if opts[:state]
     self.zip = opts[:zip] if opts[:zip]
+    self.country_code = opts[:country_code] if opts[:country_code]
   end
 
 end
