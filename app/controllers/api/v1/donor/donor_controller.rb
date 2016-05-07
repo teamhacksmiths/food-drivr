@@ -1,6 +1,6 @@
 class Api::V1::DonorController < ApplicationController
   before_action :authenticate_with_token!
-  
+
   def show
     current_donor = Donor.find_by(auth_token: params[:auth_token])
     if current_donor
@@ -28,8 +28,7 @@ class Api::V1::DonorController < ApplicationController
       # name, email, password and password_confirmation
     def donor_params
       params.require(:user).permit(:password, :password_confirmation, :description,
-                          :email, :phone, :name, :avatar,
-                          setting_attributes: [:id, :active, :notifications],
-                          :addresses)
+                          :email, :phone, :name, :avatar, :addresses,
+                          setting_attributes: [:id, :active, :notifications])
     end
 end
