@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506194506) do
+ActiveRecord::Schema.define(version: 20160506235104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(version: 20160506194506) do
     t.datetime "actual"
     t.decimal  "latitude",           precision: 15, scale: 10, default: 0.0
     t.decimal  "longitude",          precision: 15, scale: 10, default: 0.0
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.integer  "donation_id"
     t.string   "street_address"
     t.string   "street_address_two"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160506194506) do
     t.string   "state"
     t.string   "zip"
     t.integer  "dropoffstatus_id"
+    t.string   "country_code",                                 default: "+1"
   end
 
   add_index "dropoffs", ["donation_id"], name: "index_dropoffs_on_donation_id", using: :btree
@@ -159,8 +160,8 @@ ActiveRecord::Schema.define(version: 20160506194506) do
     t.datetime "actual"
     t.decimal  "latitude",           precision: 15, scale: 10, default: 0.0
     t.decimal  "longitude",          precision: 15, scale: 10, default: 0.0
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.integer  "donation_id"
     t.string   "street_address"
     t.string   "street_address_two"
@@ -168,6 +169,7 @@ ActiveRecord::Schema.define(version: 20160506194506) do
     t.string   "state"
     t.string   "zip"
     t.integer  "pickupstatus_id"
+    t.string   "country_code",                                 default: "+1"
   end
 
   add_index "pickups", ["donation_id"], name: "index_pickups_on_donation_id", using: :btree

@@ -18,7 +18,7 @@ class Api::V1::DonationsController < ApplicationController
     if donation.save
       render json: donation, status: 201, location: [:api_v1, donation]
     else
-      render json: { errors: donations.errors }, status: 422
+      render json: { errors: donation.errors }, status: 422
     end
   end
 
@@ -27,7 +27,7 @@ class Api::V1::DonationsController < ApplicationController
     if donation.update(donation_params)
       render json: donation, status: 200, location: [:api_v1, donation]
     else
-      render json: { errors: donations.errors }, status: 422
+      render json: { errors: donation.errors }, status: 422
     end
   end
 
