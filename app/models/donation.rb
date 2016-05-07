@@ -32,6 +32,17 @@ class Donation < ActiveRecord::Base
     array
   end
 
+  def select_recipient
+    if pickup.address != nil || pickup.location != nil
+      pickup_location = pickup.address || pickup.location
+      closest_recipients = Recipient.all.near(pickup_location)
+      if closest_recipients && !self.recipient
+        self.recipient = closest_recipients.first
+        self.dropoff.location = recipient.location
+      end
+    end
+  end
+
   private
 
     # Set the default status when a donation is created.
@@ -58,10 +69,6 @@ class Donation < ActiveRecord::Base
       if !self.dropoff
         self.dropoff = Dropoff.create
       end
-    end
-
-    def create_recipient
-
     end
 
     def create_donation_metum
