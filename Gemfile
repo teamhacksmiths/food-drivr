@@ -29,6 +29,7 @@ gem 'mime-types', '>=2.99.1'
 # Handles database seeding in migration form
 gem 'seed_migration'
 
+
 # active admin dependencies
 gem 'devise'
 gem 'cancan' # or cancancan
