@@ -42,12 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def set_defaults
-    unless role
-      # Set the default role as other until a role is passed in.
-        # Also, need to set the "Type"
-      self.role = Role.find(2)
-    end
-    set_role_for_type
+    match_type_to_role
     set_default_settings
   end
 
@@ -71,25 +66,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def set_role_for_type
-    if self.role
-      self.type = self.role.description
-    end
-    user_role = Role.where(description: self.type).first
-    if role
-      self.role = role
-    else
-      # Set unnassigned if the type is not found
-      self.role = Role.last
-    end
-  end
-
   def match_type_to_role
     if self.role && !self.type
       self.type = self.role.description
     elsif !self.role && self.type
       self.role = Role.where(description: self.type).first
-    elsif !self.role && !self.type
+    elsif self.role_id == nil && self.role == nil
       self.role = Role.last
     end
   end
