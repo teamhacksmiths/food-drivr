@@ -3,7 +3,9 @@ class Api::V1::Donor::DonorDonationsController < ApplicationController
   respond_to :json
 
   def index
-    respond_with current_user.donations.all
+    render json: {
+      donations: current_user.donations.all
+    }
   end
 
   def show
@@ -11,21 +13,34 @@ class Api::V1::Donor::DonorDonationsController < ApplicationController
   end
 
   def create
-    donation = current_user.donations.build(donation_params)
-    donation.save
+    @donation = current_user.donations.build(donation_params)
+    @donation.save
+
+    @items = params[:donation][:items]
+    if @items
+      @items.each do |item|
+        @donation.items << DonationItem.create(donation_id: @donation.id,
+                                               description: item[:description],
+                                               unit: item[:unit],
+                                               quantity: item[:quantity])
+      end
+    end
+
     if params[:donation][:pickup_location] != nil
       @location = params[:donation][:pickup_location]
       @latitude = @location[:latitude].to_f
       @longitude = @location[:longitude].to_f
       location_hash = { :longitude => @longitude, :latitude => @latitude  }
-      donation.pickup.location = location_hash
+      @donation.pickup.location = location_hash
+      @donation.select_recipient
     elsif current_user.default_address != nil
-      donation.pickup.address = current_user.default_address
+      @donation.pickup.address = current_user.default_address
+      @donation.select_recipient
     end
-    if donation.save && donation.pickup.save
-      render json: donation, status: 201, location: [:api_v1, donation]
+    if @donation.save && @donation.pickup.save
+      render json: @donation, status: 201, location: [:api_v1, @donation]
     else
-      render json: { errors: donation.errors }, status: 422
+      render json: { errors: @donation.errors }, status: 422
     end
   end
 
@@ -41,7 +56,11 @@ class Api::V1::Donor::DonorDonationsController < ApplicationController
   private
 
     def donation_params
-      params.require(:donation).permit(:description, :donation_types, :donation_meta)
+      params.require(:donation).permit(:description, :pickup_location, :donation_meta, items_attributes: [:description, :unit, :quantity])
+    end
+
+    def item_params
+      params.require(:donation).permit(:items => [:description, :unit, :quantity])
     end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506235104) do
+ActiveRecord::Schema.define(version: 20160507210938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(version: 20160506235104) do
   end
 
   add_index "donation_images", ["donation_id"], name: "index_donation_images_on_donation_id", using: :btree
+
+  create_table "donation_items", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "quantity"
+    t.string   "unit"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "donation_id"
+  end
+
+  add_index "donation_items", ["donation_id"], name: "index_donation_items_on_donation_id", using: :btree
 
   create_table "donation_meta", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -187,10 +198,13 @@ ActiveRecord::Schema.define(version: 20160506235104) do
     t.string   "street_address_two"
     t.string   "city"
     t.integer  "phone"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.string   "state"
     t.string   "zip"
+    t.string   "country_code",                                 default: "US"
+    t.decimal  "latitude",           precision: 15, scale: 10, default: 0.0
+    t.decimal  "longitude",          precision: 15, scale: 10, default: 0.0
   end
 
   create_table "roles", force: :cascade do |t|
@@ -256,6 +270,7 @@ ActiveRecord::Schema.define(version: 20160506235104) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "donation_images", "donations"
+  add_foreign_key "donation_items", "donations"
   add_foreign_key "dropoffs", "donations"
   add_foreign_key "dropoffs", "dropoffstatuses"
   add_foreign_key "organization_addresses", "organizations"
