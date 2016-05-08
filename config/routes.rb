@@ -39,8 +39,12 @@ Rails.application.routes.draw do
         get 'donations/accepted' => 'driver_donations#accepted', as: :donations_accepted
         # Get a list of donations that have been cancelled by the current driver
         get 'donations/cancelled' => 'driver_donations#cancelled', as: :donations_cancelled
+        # Get a single donation for a driver
+        get 'donations/:donation_id' => 'driver_donations#show'
         # Update the status of a specific donation by the current driver
         post 'donations/:donation_id/status' => 'driver_donations#status'
+        # Update a single donation (Any specific changes that need to be made BY a Driver)
+        patch 'donations/:donation_id' => 'driver_donations#update'
       end
       resources :donations, :only => [:show, :index, :update]
       resources :sessions, :only => [:create, :destroy], param: :auth_token

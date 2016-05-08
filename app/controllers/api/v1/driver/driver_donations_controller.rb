@@ -11,6 +11,15 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
       }
   end
 
+  def show
+    @found_donation = Donation.find(params[:donation_id])
+    if @found_donation.driver == current_user || @found_donation.driver == nil
+      respond_with @found_donation
+    else
+      render json: { errors: "Donation belongs to another Driver." }, status: 403
+    end
+  end
+
   def update
     donation = current_user.donations.find(params[:id])
     if donation.update(donation_params)
@@ -38,6 +47,7 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
     if update == true
       if params[:status][:donation_status]
         @donation.status = DonationStatus.find(params[:status][:donation_status])
+        @donation.status.save
       end
       if params[:status][:pickup_status]
         @donation.pickup.pickupstatus = Pickupstatus.find(params[:status][:pickup_status])
