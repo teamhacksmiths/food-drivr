@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   before_create :generate_authentication_token!
   after_initialize :set_defaults
 
+  before_save :match_type_to_role
+
   validates :auth_token, uniqueness: true
   validates :role, presence: true
 
@@ -21,6 +23,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
+  validates :role, presence: true
 
   # User should have a role_id, although we may want to look into setting
   # Up separate classes.
@@ -47,7 +50,7 @@ class User < ActiveRecord::Base
   end
 
   def set_default_settings
-    unless setting
+    unless self.setting != nil
       if self.role_id == 0
         self.setting = Setting.create(active: true, notifications: false)
       else
@@ -60,19 +63,26 @@ class User < ActiveRecord::Base
     self.setting
   end
 
+  # Convenience method for updating settings for a user.
   def update_settings(settings = {})
     if self.setting
       self.setting.update(settings)
+    else
+      self.setting = Setting.create(settings)
     end
   end
 
+  # Match the type of user to role and visa versa, providing backwords compatibility
   def match_type_to_role
-    if self.role && !self.type
-      self.type = self.role.description
-    elsif !self.role && self.type
-      self.role = Role.where(description: self.type).first
-    elsif self.role_id == nil && self.role == nil
-      self.role = Role.last
+    if self.role != nil || self.role_id != nil
+      if !self.type || self.role.description.downcase != self.type.downcase
+        @type = self.role.description.to_s.capitalize
+        begin
+          self.becomes!(Object.const_get(@type))
+        rescue StandardError => error
+          puts "Unable to convert type to: #{@type}"
+        end
+      end
     end
   end
 end
