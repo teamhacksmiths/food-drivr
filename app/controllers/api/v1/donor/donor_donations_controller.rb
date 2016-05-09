@@ -3,8 +3,11 @@ class Api::V1::Donor::DonorDonationsController < ApplicationController
   respond_to :json
 
   def index
+    @user_donations = current_user.donations.all
     render json: {
-      donations: current_user.donations.all
+      donations: ActiveModel::ArraySerializer.new(@user_donations,
+                                                  each_serializer: DonationSerializer,
+                                                  root: false)
     }
   end
 
