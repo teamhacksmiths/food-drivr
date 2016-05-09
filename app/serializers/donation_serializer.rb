@@ -1,11 +1,10 @@
 class DonationSerializer < ActiveModel::Serializer
-  attributes :id, :description, :created_at, :updated_at, :status_id, :status, :participants
+  attributes :id, :note, :created_at, :updated_at, :status_id, :status, :participants
   has_one :pickup
   has_one :dropoff
   has_one :recipient
 
   has_many :items
-  has_many :donation_types
   has_many :images
 
   def status
