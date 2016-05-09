@@ -17,9 +17,15 @@ class Api::V1::DonorController < ApplicationController
       render json: { errors: "Current user is not a donor.", status: 422 }
     end
     if current_user.update(donor_params)
+      @addresses = params[:donor][:addresses]
+      if @addresses != nil
+        @addresses.each do |address|
+          current_user.addresses << DonorAddress.create(address)
+        end
+      end
       render json: current_user, serializer: DonorSerializer, status: 200, location: [:api_v1, current_user]
     else
-      render json: { errors: user.errors }, status: 422
+      render json: { errors: current_user.errors }, status: 422
     end
   end
 
@@ -27,8 +33,10 @@ class Api::V1::DonorController < ApplicationController
     # User params accepted at this point for creating a user are:
       # name, email, password and password_confirmation
     def donor_params
-      params.require(:user).permit(:password, :password_confirmation, :description,
+      params.require(:donor).permit(:password, :password_confirmation, :description,
                           :email, :phone, :name, :avatar, :addresses,
-                          setting_attributes: [:id, :active, :notifications])
+                          setting_attributes: [:id, :active, :notifications],
+                          addresses_attributes: [:street_address, :street_address_two,
+                                                 :city, :state, :zip, :default])
     end
 end

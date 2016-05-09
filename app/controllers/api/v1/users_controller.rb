@@ -31,7 +31,7 @@ class Api::V1::UsersController < ApplicationController
     if current_user.update(user_params)
       render json: current_user, serializer: UserSerializer, status: 200, location: [:api_v1, current_user]
     else
-      render json: { errors: user.errors }, status: 422
+      render json: { errors: current_user.errors }, status: 422
     end
   end
 
@@ -41,6 +41,7 @@ class Api::V1::UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:password, :password_confirmation, :description,
                           :email, :phone, :name, :avatar, :role_id,
-                          setting_attributes: [:id, :active, :notifications])
+                          setting_attributes: [:id, :active, :notifications],
+                          organization_attributes: [:id, :name, :phone])
     end
 end

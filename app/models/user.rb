@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_one :organization
   has_one :setting, autosave: true, dependent: :destroy
   accepts_nested_attributes_for :setting
+  accepts_nested_attributes_for :organization
 
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
