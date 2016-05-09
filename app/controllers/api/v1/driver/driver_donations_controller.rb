@@ -115,7 +115,7 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
   private
 
     def donation_params
-      params.require(:donation).permit(:id, :description, :status_id)
+      params.require(:donation).permit(:id, :description, :note, :status_id)
     end
 
     def status_params

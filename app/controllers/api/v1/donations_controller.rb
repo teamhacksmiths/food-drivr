@@ -40,7 +40,7 @@ class Api::V1::DonationsController < ApplicationController
   private
 
     def donation_params
-      params.require(:donation).permit(:description, :donation_types, :donation_meta)
+      params.require(:donation).permit(:description, :note, :items, :donation_types, :donation_meta)
     end
 
     def status_params
