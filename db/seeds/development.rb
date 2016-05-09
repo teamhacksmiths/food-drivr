@@ -148,6 +148,7 @@ types = DonationType.all
   Donation.create!(donor: donors.sample,
                    driver: drivers.sample,
                    recipient: recipients.sample,
+                   note: FFaker::HipsterIpsum.phrase,
                    description: FFaker::HipsterIpsum.phrase,
                    status: statuses.sample)
 
@@ -157,6 +158,7 @@ end
 20.times do |n|
   Donation.create!(donor: donors.sample,
                    recipient: recipients.sample,
+                   note: FFaker::HipsterIpsum.phrase,
                    description: FFaker::HipsterIpsum.phrase,
                    status: pending)
 end
