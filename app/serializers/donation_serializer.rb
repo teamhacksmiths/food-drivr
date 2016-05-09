@@ -20,7 +20,4 @@ class DonationSerializer < ActiveModel::Serializer
   def driver
     DriverSerializer.new(object.driver).attributes if object.driver
   end
-  def donation_types
-    object.donation_types_array
-  end
 end
