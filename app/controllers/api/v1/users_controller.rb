@@ -41,7 +41,6 @@ class Api::V1::UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:password, :password_confirmation, :description,
                           :email, :phone, :name, :avatar, :role_id,
-                          setting_attributes: [:id, :active, :notifications],
-                          organization_attributes: [:id, :name, :phone])
+                          setting_attributes: [:id, :active, :notifications])
     end
 end

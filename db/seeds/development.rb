@@ -56,41 +56,6 @@ end
 end
 
 
-users = User.all
-orgs = Organization.all
-
-
-orgs.each do |organization|
-
-  organization.organization_addresses << OrganizationAddress.create(organization_id: organization.id,
-                                         street_address: FFaker::AddressUS.street_address,
-                                         street_address_two: FFaker::AddressUS.secondary_address,
-                                         city: FFaker::AddressUS.city,
-                                         state: FFaker::AddressUS.state,
-                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
-                                         default: true)
-  organization.organization_addresses << OrganizationAddress.create(organization_id: organization.id,
-                                         street_address: FFaker::AddressUS.street_address,
-                                         street_address_two: FFaker::AddressUS.secondary_address,
-                                         city: FFaker::AddressUS.city,
-                                         state: FFaker::AddressUS.state,
-                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
-                                         default: false)
-  organization.organization_addresses << OrganizationAddress.create(organization_id: organization.id,
-                                         street_address: FFaker::AddressUS.street_address,
-                                         street_address_two: FFaker::AddressUS.secondary_address,
-                                         city: FFaker::AddressUS.city,
-                                         state: FFaker::AddressUS.state,
-                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
-                                         default: false)
-end
-
-users.each do |u|
-  u.organization = orgs.sample
-  u.save
-end
-
-
 donors = Donor.all
 
 # Create addresses for the donor
@@ -206,7 +171,7 @@ donations.each do |donation|
                            state: FFaker::AddressUS.state,
                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
 
-                           
+
     # Create a dropoff for the donation.
     donation.dropoff = Dropoff.create(estimated: FFaker::Time.date,
                               actual: FFaker::Time.date,

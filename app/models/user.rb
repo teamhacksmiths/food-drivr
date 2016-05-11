@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
   # Up separate classes.
   belongs_to :role
 
+  alias :settings :setting   # not wrong, only for getter
+  alias :settings= :setting=  # add this for setter
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
@@ -60,18 +63,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def settings
-    self.setting
-  end
-
-  # Convenience method for updating settings for a user.
-  def update_settings(settings = {})
-    if self.setting
-      self.setting.update(settings)
-    else
-      self.setting = Setting.create(settings)
-    end
-  end
 
   # Match the type of user to role and visa versa, providing backwords compatibility
   def match_type_to_role
