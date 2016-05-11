@@ -49,14 +49,6 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
         @donation.status = DonationStatus.find(params[:status][:donation_status])
         @donation.status.save
       end
-      if params[:status][:pickup_status]
-        @donation.pickup.pickupstatus = Pickupstatus.find(params[:status][:pickup_status])
-        @donation.pickup.save
-      end
-      if params[:status][:dropoff_status]
-        @donation.dropoff.dropoffstatus = Dropoffstatus.find(params[:status][:dropoff_status])
-        @donation.dropoff.save
-      end
       if @donation.save
         head 204
       else

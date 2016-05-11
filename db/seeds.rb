@@ -10,11 +10,11 @@ Role.create!(id: 3, description: 'Unassigned')
 # Define donation status
 DonationStatus.create!(name: 'Pending', id: 0)
 DonationStatus.create!(name: 'Accepted', id: 1)
-DonationStatus.create!(name: 'Completed', id: 2)
-DonationStatus.create!(name: 'Suspended', id: 3)
-DonationStatus.create!(name: 'Cancelled', id: 4)
-DonationStatus.create!(name: 'PickedUp', id: 5)
-DonationStatus.create!(name: 'DroppedOff', id: 6)
+DonationStatus.create!(name: 'PickedUp', id: 2)
+DonationStatus.create!(name: 'DroppedOff', id: 3)
+DonationStatus.create!(name: 'Completed', id: 4)
+DonationStatus.create!(name: 'Suspended', id: 5)
+DonationStatus.create!(name: 'Cancelled', id: 6)
 
 # Run environment-specific seeds
 load(Rails.root.join( 'db', 'seeds', "#{Rails.env.downcase}.rb"))
