@@ -1,6 +1,3 @@
-dropoffstatuses = Dropoffstatus.all
-pickupstatuses = Pickupstatus.all
-
 AdminUser.create!(email: 'admin@example.com',
                   password: 'password',
                   password_confirmation: 'password')
@@ -11,6 +8,7 @@ User.create!(name: 'Donor User',
              email: 'donor@hacksmiths.com',
              password: 'password',
              password_confirmation: 'password',
+             company: 'Hacksmiths',
              description: 'An dummy donor user',
              expiration: Time.now + 20.years,
              phone: '+1 123 456 789',
@@ -21,6 +19,7 @@ User.create!(name: 'Donor User',
 User.create!(name: 'Driver User',
              email: 'driver@hacksmiths.com',
              password: 'password',
+             company: 'Hacksmiths',
              password_confirmation: 'password',
              description: 'An dummy driver user',
              expiration: Time.now + 20.years,
@@ -31,6 +30,7 @@ User.create!(name: 'Driver User',
 User.create!(name: 'Other User',
              email: 'other@hacksmiths.com',
              password: 'password',
+             company: 'Hacksmiths',
              password_confirmation: 'password',
              description: 'An dummy other user',
              expiration: Time.now + 20.years,
@@ -43,6 +43,7 @@ User.create!(name: 'Other User',
                email: FFaker::Internet.email,
                password: 'password',
                password_confirmation: 'password',
+               company: 'Hacksmiths',
                description: FFaker::Job.title,
                expiration: Time.now + 20.years,
                phone: FFaker::PhoneNumber.phone_number,
@@ -180,8 +181,7 @@ end
 
 # Loop through the donations, creating all related models
 donations.each do |donation|
-  # Create 3 unique types for each donation
-
+  # Create 7 unique items for each donation
   DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
                       unit: FFaker::UnitEnglish::mass_abbr, quantity: [*1..20].sample)
   DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
@@ -194,10 +194,6 @@ donations.each do |donation|
                       unit: FFaker::UnitEnglish::mass_abbr, quantity: [*1..20].sample)
   DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
                       unit: FFaker::UnitEnglish::mass_abbr, quantity: [*1..20].sample)
-
-  Type.create!(donation_id: donation.id, donation_type_id: unique_donation_type_id)
-  Type.create!(donation_id: donation.id, donation_type_id: unique_donation_type_id)
-  Type.create!(donation_id: donation.id, donation_type_id: unique_donation_type_id)
 
   donation.pickup = Pickup.create(estimated: FFaker::Time.date,
                            actual: FFaker::Time.date,
@@ -210,6 +206,7 @@ donations.each do |donation|
                            state: FFaker::AddressUS.state,
                            zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
 
+                           
     # Create a dropoff for the donation.
     donation.dropoff = Dropoff.create(estimated: FFaker::Time.date,
                               actual: FFaker::Time.date,
