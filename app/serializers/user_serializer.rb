@@ -1,7 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :phone, :name, :email, :avatar, :role_id, :type, :settings, :default_address
-
-  has_one :organization
+  attributes :id, :phone, :name, :company, :email, :avatar, :role_id, :type, :settings
 
   def settings
     custom_settings = {}
@@ -9,11 +7,6 @@ class UserSerializer < ActiveModel::Serializer
       custom_settings[:notifications] = object.setting.notifications
       custom_settings[:active] = object.setting.active || false
       custom_settings
-    end
-  end
-  def default_address
-    if object.organization && object.organization.return_address
-      object.organization.return_address
     end
   end
 end

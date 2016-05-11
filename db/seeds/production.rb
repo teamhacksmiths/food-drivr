@@ -1,6 +1,3 @@
-dropoffstatuses = Dropoffstatus.all
-pickupstatuses = Pickupstatus.all
-
 AdminUser.create!(email: 'admin@example.com',
                   password: 'password',
                   password_confirmation: 'password')
@@ -139,12 +136,12 @@ end
 donors = Donor.all
 drivers = Driver.all
 recipients = Recipient.all
-statuses = DonationStatus.last(4)
+statuses = DonationStatus.last(6)
 pending = DonationStatus.first
 types = DonationType.all
 
 
-100.times do |n|
+20.times do |n|
   Donation.create!(donor: donors.sample,
                    driver: drivers.sample,
                    recipient: recipients.sample,
@@ -221,15 +218,6 @@ donations.each do |donation|
                               city: FFaker::AddressUS.city,
                               state: FFaker::AddressUS.state,
                               zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
-  # If the status is not pending, then sample from the pickup and dropoff statuses.
-  if donation.status_name != "Pending"
-    donation.pickup.status = pickupstatuses.sample
-    donation.dropoff.status = dropoffstatuses.sample
-  else
-    # If the donation is pending, make sure the status is pending.
-    donation.pickup.status = pickupstatuses.first
-    donation.dropoff.status = dropoffstatuses.first
-  end
 
   # Finally, once all fields are set, save the donation
   donation.save
