@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
   respond_to :json
 
   # Send the current_user or throw an error
-  def show
+  def show    
     current_user = User.find_by(auth_token: params[:auth_token])
     if current_user
       respond_with current_user, serializer: UserSerializer
