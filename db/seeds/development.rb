@@ -4,7 +4,7 @@ AdminUser.create!(email: 'admin@example.com',
 
 
 # Dummy donor user
-User.create!(name: 'Donor User',
+Donor.create!(name: 'Donor User',
              email: 'donor@hacksmiths.com',
              password: 'password',
              password_confirmation: 'password',
@@ -16,7 +16,7 @@ User.create!(name: 'Donor User',
 
 
 # Dummy driver user
-User.create!(name: 'Driver User',
+Driver.create!(name: 'Driver User',
              email: 'driver@hacksmiths.com',
              password: 'password',
              company: 'Hacksmiths',
@@ -27,7 +27,7 @@ User.create!(name: 'Driver User',
              role_id: 1)
 
 # Dummy other user
-User.create!(name: 'Other User',
+Other.create!(name: 'Other User',
              email: 'other@hacksmiths.com',
              password: 'password',
              company: 'Hacksmiths',
