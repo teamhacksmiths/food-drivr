@@ -3,13 +3,11 @@ class Api::V1::SessionsController < ApplicationController
 
   def create
     user_password = params[:session][:password]
-    user_email = params[:session][:email].downcase!
+    user_email = params[:session][:email]
 
-    user = user_email.present? && User.find_by(email: user_email)
+    user = user_email.present? && User.find_by(email: user_email.downcase)
 
-    if !user
-      render json: { errors: "No user found"  }, status: 422
-    elsif user.valid_password? user_password
+    if user.valid_password? user_password
       sign_in user, store: false
       user.generate_authentication_token!
       user.save
