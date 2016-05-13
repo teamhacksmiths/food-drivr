@@ -3,7 +3,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def create
     user_password = params[:session][:password]
-    user_email = params[:session][:email].downcase
+    user_email = params[:session][:email].downcase!
 
     user = user_email.present? && User.find_by(email: user_email)
 
