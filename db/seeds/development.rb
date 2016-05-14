@@ -51,8 +51,7 @@ Other.create!(name: 'Other User',
 end
 
 100.times do |n|
-  Organization.create(name: FFaker::Company.name,
-                      phone: FFaker::PhoneNumber.phone_number)
+  Organization.create(name: FFaker::Company.name)
 end
 
 
@@ -147,17 +146,17 @@ end
 # Loop through the donations, creating all related models
 donations.each do |donation|
   # Create 7 unique items for each donation
-  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+  DonationItem.create(donation_id: donation.id, type_description: FFaker::Food::meat,
                       unit: FFaker::UnitEnglish::mass_abbr, quantity: [*1..20].sample)
-  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+  DonationItem.create(donation_id: donation.id, type_description: FFaker::Food::meat,
                       unit: FFaker::UnitEnglish::mass_abbr, quantity: [*1..20].sample)
-  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+  DonationItem.create(donation_id: donation.id, type_description: FFaker::Food::meat,
                       unit: FFaker::UnitEnglish::mass_abbr, quantity: [*1..20].sample)
-  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+  DonationItem.create(donation_id: donation.id, type_description: FFaker::Food::meat,
                       unit: FFaker::UnitEnglish::mass_abbr, quantity: [*1..20].sample)
-  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+  DonationItem.create(donation_id: donation.id, type_description: FFaker::Food::meat,
                       unit: FFaker::UnitEnglish::mass_abbr, quantity: [*1..20].sample)
-  DonationItem.create(donation_id: donation.id, description: FFaker::Food::meat,
+  DonationItem.create(donation_id: donation.id, type_description: FFaker::Food::meat,
                       unit: FFaker::UnitEnglish::mass_abbr, quantity: [*1..20].sample)
 
   donation.pickup = Pickup.create(estimated: FFaker::Time.date,
