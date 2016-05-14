@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :role, presence: true
 
-  # User should have a role_id, although we may want to look into setting
-  # Up separate classes.
+  # User has a role_id, determing their type / role, i.e.
+    # "Donor", "Driver", "Other"
   belongs_to :role
 
   alias :settings :setting   # not wrong, only for getter
