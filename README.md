@@ -37,6 +37,7 @@ The [Hacksmiths](http://hacksmiths.io) are working with a charitable organizatio
 #### Front End
 * Frank Robert - [OfficialPhrank](https://github.com/OfficialPhrank)
 * Gabriele Cimato - [Gabri3l](https://github.com/Gabri3l)
+* Ryan Collins - [RyanCCollins](htts://github.com/ryanccollins)
 * Jake Bryan - [bryanj4](https://github.com/bryanj4)
 
 #### Design
