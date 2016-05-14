@@ -4,9 +4,8 @@ class Api::V1::SessionsController < ApplicationController
   def create
     user_password = params[:session][:password]
     user_email = params[:session][:email]
-
+    # Find user by email (downcased!) <~~ Important!
     user = user_email.present? && User.find_by(email: user_email.downcase)
-
     if user.valid_password? user_password
       sign_in user, store: false
       user.generate_authentication_token!
@@ -15,10 +14,12 @@ class Api::V1::SessionsController < ApplicationController
     else
       render json: { errors: "Invalid email or password" }, status: 422
     end
-
   end
+
+  #Destroy session by auth_token paramater
   def destroy
-    user = User.find_by(auth_token: params[:auth_token])
+    auth_token = params[:auth_token] || request.headers["Authorization"]
+    user = User.find_by(auth_token: auth_token)
     unless !user
       user.generate_authentication_token!
       user.save
