@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20160510171110) do
   add_index "donation_images", ["donation_id"], name: "index_donation_images_on_donation_id", using: :btree
 
   create_table "donation_items", force: :cascade do |t|
-    t.string   "description"
+    t.string   "type_description"
     t.integer  "quantity"
     t.string   "unit"
     t.datetime "created_at",  null: false
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20160510171110) do
   end
 
   create_table "donation_types", force: :cascade do |t|
-    t.string   "description"
+    t.string   "type_description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "quantity"
@@ -163,7 +163,6 @@ ActiveRecord::Schema.define(version: 20160510171110) do
     t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.string   "name"
-    t.string   "phone"
   end
 
   add_index "organizations", ["user_id"], name: "index_organizations_on_user_id", using: :btree

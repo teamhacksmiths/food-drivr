@@ -1,3 +1,3 @@
 class DonationItemSerializer < ActiveModel::Serializer
-  attributes :description, :unit, :quantity
+  attributes :type_description, :unit, :quantity
 end
