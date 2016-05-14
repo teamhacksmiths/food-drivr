@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
     # "Donor", "Driver", "Other"
   belongs_to :role
 
+
   alias :settings :setting   # not wrong, only for getter
   alias :settings= :setting=  # add this for setter
 
