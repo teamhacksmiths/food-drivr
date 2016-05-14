@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   before_create :generate_authentication_token!
   after_initialize :set_defaults
 
-  before_save :match_type_to_role
-
   validates :auth_token, uniqueness: true
   validates :role, presence: true
 
@@ -42,12 +40,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Generate an auth_token for a user upon saving of record, enabling easy
+    # Authentication
   def generate_authentication_token!
     begin
       self.auth_token = Devise.friendly_token
     end while self.class.exists?(auth_token: auth_token)
   end
 
+  # Called on before
   def set_defaults
     match_type_to_role
     set_default_settings
