@@ -16,9 +16,6 @@ Rails.application.routes.draw do
         resources :organization, :only => [:show, :create, :update, :destroy]
       end
 
-      resources :donor, :only => [:show, :update], param: :auth_token do
-        post '/addresses' => 'donor_addresses#index'
-      end
 
       namespace :donor do
         get 'donations' => 'donor_donations#index', as: :donor_donations_all
