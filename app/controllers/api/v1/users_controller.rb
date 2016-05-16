@@ -27,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update_password
     if current_user.update_password_with_password(password_params)
-      sign_in @user, :bypass => true
+      sign_in current_user, :bypass => true
       head 204
     else
       render json: { errors: current_user.erros }, status: 422
