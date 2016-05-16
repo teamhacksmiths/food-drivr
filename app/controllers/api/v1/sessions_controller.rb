@@ -16,6 +16,25 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
+  def update_password
+    @user = User.find(current_user)
+    user_data = params[:user]
+    current_password = user_data[:current_password]
+    new_password = user_data[:password]
+    new_password_confirmation = user_data[:password_confirmation]
+
+    if @user
+      unless new_password != new_password_confirmation
+
+      else
+        render json: { errors: "Password and password confirmation must match"}, status: 406
+      end
+    else
+      render json: { errors: "An error occured while updating your password.  Please try again."}, status: 400
+    end
+
+  end
+
   #Destroy session by auth_token paramater
   def destroy
     auth_token = params[:auth_token] || request.headers["Authorization"]

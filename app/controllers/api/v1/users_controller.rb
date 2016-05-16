@@ -35,6 +35,7 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+
   private
     # User params accepted at this point for creating a user are:
       # name, email, password and password_confirmation
