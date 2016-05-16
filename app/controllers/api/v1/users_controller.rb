@@ -26,6 +26,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update_password
+    auth_token = params[:auth_token] || request.headers["Authorization"]
+    @current_user = User.find_by(auth_token: auth_token)
     if current_user.update_password_with_password(password_params)
       sign_in current_user, :bypass => true
       head 204

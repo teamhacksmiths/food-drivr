@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
   end
 
 
-  def update_with_password(params, *options)
+  def update_password_with_password(params, *options)
     current_password = params.delete(:current_password)
     result =  if valid_password? current_password
                 update_attributes(params, *options)
