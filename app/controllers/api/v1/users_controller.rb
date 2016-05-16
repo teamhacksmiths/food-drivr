@@ -26,8 +26,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update_password
-    @user = User.find(current_user.id)
-    if @user.update_password_with_password(password_params)
+    if current_user.update_password_with_password(password_params)
       sign_in @user, :bypass => true
       head 204
     else
