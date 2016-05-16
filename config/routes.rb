@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       # User's take an auth_token parameter for their restful routes
         # i.e. /users/:auth_token/whatever.  This is to enforce resourceful routes
       resources :users, :only => [:show, :create, :update], param: :auth_token do
+        post '/users/:auth_token/password-update' => 'users#update_password'
         resources :organization, :only => [:show, :create, :update, :destroy]
       end
 

@@ -25,6 +25,16 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def update_password
+    @user = User.find(current_user.id)
+    if @user.update_password_with_password(password_params)
+      sign_in @user, :bypass => true
+      head 204
+    else
+      render json: { errors: current_user.erros }, status: 422
+    end
+  end
+
   # Update will update a user with the params passed in.
   # We need to make sure to safeguard against bad params in the model layer
   def update
@@ -43,5 +53,9 @@ class Api::V1::UsersController < ApplicationController
       params.require(:user).permit(:password, :password_confirmation, :description,
                           :email, :phone, :name, :avatar, :role_id,
                           setting_attributes: [:id, :active, :notifications])
+    end
+
+    def password_params
+      params.require(:user).permit(:current_password, :password, :password_confirmation)
     end
 end
