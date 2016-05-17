@@ -37,11 +37,14 @@ The [Hacksmiths](http://hacksmiths.io) are working with a charitable organizatio
 #### Front End
 * Frank Robert - [OfficialPhrank](https://github.com/OfficialPhrank)
 * Gabriele Cimato - [Gabri3l](https://github.com/Gabri3l)
-* Ryan Collins - [RyanCCollins](htts://github.com/ryanccollins)
+* Ryan Collins - [RyanCCollins](htts://github.com/RyanCCollins)
 * Jake Bryan - [bryanj4](https://github.com/bryanj4)
 
 #### Design
 * Sean Craig - [swhc1066](https://github.com/swhc1066)
+
+#### Marketing
+* Christian Mondorf - []()
 
 ## Rails API
 See [this README.md](https://github.com/teamhacksmiths/food-drivr/tree/master/app/README.md) file for getting started and installation instructions.
