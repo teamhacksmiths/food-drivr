@@ -25,7 +25,6 @@ The [Hacksmiths](http://hacksmiths.io) are working with a charitable organizatio
 
 #### Backend Ruby on Rails API & Admin Dashboard
 * Ryan Collins - [RyanCCollins](https://github.com/RyanCCollins)
-* Deanna Wagner - [DeannaWagner](https://github.com/DeannaWagner)
 * Peter James Bernante - [elbernante](https://github.com/elbernante)
 
 #### iOS
