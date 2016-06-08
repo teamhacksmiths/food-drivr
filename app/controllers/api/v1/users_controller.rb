@@ -54,7 +54,7 @@ class Api::V1::UsersController < ApplicationController
       params.require(:user).permit(:password, :password_confirmation, :description,
                           :email, :phone, :name, :company, :avatar, :role_id,
                           setting_attributes: [:id, :active, :notifications],
-                          addresses_attributes: [:street_address, :street_address_two,
+                          addresses_attributes: [:address, :street_address, :street_address_two,
                                                  :city, :state, :zip, :default])
     end
 
