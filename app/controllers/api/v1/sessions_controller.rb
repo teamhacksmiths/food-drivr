@@ -26,7 +26,7 @@ class Api::V1::SessionsController < ApplicationController
       user.save
       head 204
     else
-      render json: { errors: "Requested resource not found"}, status: 400
+      render json: { errors: "That token must've already been destroyed"}, status: 404
     end
   end
 end

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
 
       namespace :donor do
+        get 'donations' => 'donor_donations#index'
         get 'donations/all' => 'donor_donations#index', as: :donor_donations_all
         post 'donations' => 'donor_donations#create', as: :donor_donations_create
         get 'donations/:id' => 'donor_donations#show'
