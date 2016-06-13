@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
   has_one :setting, autosave: true, dependent: :destroy
   accepts_nested_attributes_for :setting
   accepts_nested_attributes_for :organization
-
+  has_many :addresses, foreign_key: "user_id", class_name: "DonorAddress"
+  accepts_nested_attributes_for :addresses
+  
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -2,7 +2,6 @@ class Donor < User
   before_validation :set_default_role!, on: :create
 
   has_many :donations, foreign_key: "donor_id", class_name: "Donation"
-  has_many :addresses, foreign_key: "donor_id", class_name: "DonorAddress"
   accepts_nested_attributes_for :addresses
 
   # Returns the first of addresses where default is true
