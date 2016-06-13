@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :organization
   has_many :addresses, foreign_key: "user_id", class_name: "DonorAddress"
   accepts_nested_attributes_for :addresses
-  
+
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -82,7 +82,23 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Returns the first of addresses where default is true
+  # @param None
+  # @return Either the first default address or the first address if there is
+    # No default address
+  def default_address
+    default_addresses = self.addresses.where(default: true)
+    if default_addresses.count == 0
+      self.addresses.first
+    else
+      default_addresses.first
+    end
+  end
 
+  # Upadte the password with a new password
+    # @param params a hash containing the submitted database
+    # @param *options - an array of optional options.
+    # @return result - The result of the transaction for updating the password.
   def update_password_with_password(params, *options)
     current_password = params.delete(:current_password)
     result =  if valid_password? current_password
