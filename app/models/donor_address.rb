@@ -1,6 +1,17 @@
+require 'street_address'
 class DonorAddress < ActiveRecord::Base
   after_initialize :set_default_status
   belongs_to :user
+
+  def full_address=(address)
+    new_address = StreetAddress::US.parse(address)
+    self.full_address = address
+    self.street_address = "#{new_address.number} #{new_address.street} #{new_address.street_type}"
+    street_address_two = "#{new_address.unit}"
+    self.city = new_address.city
+    self.state = new_address.state
+    self.zip = new_address.postal_code
+  end
 
   # Set the address to be default if it is the only one.
   def set_default_status

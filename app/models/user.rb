@@ -67,7 +67,6 @@ class User < ActiveRecord::Base
     end
   end
 
-
   # Match the type of user to role and visa versa, providing backwords compatibility
   def match_type_to_role
     if self.role != nil || self.role_id != nil
