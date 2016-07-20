@@ -2,7 +2,6 @@ AdminUser.create!(email: 'admin@example.com',
                   password: 'password',
                   password_confirmation: 'password')
 
-
 # Dummy donor user
 Donor.create!(name: 'Donor User',
              email: 'donor@hacksmiths.com',
@@ -13,7 +12,6 @@ Donor.create!(name: 'Donor User',
              expiration: Time.now + 20.years,
              phone: '+1 123 456 789',
              role_id: 0)
-
 
 # Dummy driver user
 Driver.create!(name: 'Driver User',
@@ -60,7 +58,7 @@ donors = Donor.all
 
 # Create addresses for the donor
 donors.each do |donor|
-  donor.addresses << DonorAddress.create(donor_id: donor.id,
+  donor.addresses << DonorAddress.create(user_id: donor.id,
                                          street_address: FFaker::AddressUS.street_address,
                                          street_address_two: FFaker::AddressUS.secondary_address,
                                          city: FFaker::AddressUS.city,
@@ -68,7 +66,7 @@ donors.each do |donor|
                                          zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
                                          default: true)
 
- donor.addresses << DonorAddress.create(donor_id: donor.id,
+ donor.addresses << DonorAddress.create(user_id: donor.id,
                                         street_address: FFaker::AddressUS.street_address,
                                         street_address_two: FFaker::AddressUS.secondary_address,
                                         city: FFaker::AddressUS.city,
@@ -76,7 +74,7 @@ donors.each do |donor|
                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
                                         default: false)
 
-donor.addresses << DonorAddress.create(donor_id: donor.id,
+donor.addresses << DonorAddress.create(user_id: donor.id,
                                        street_address: FFaker::AddressUS.street_address,
                                        street_address_two: FFaker::AddressUS.secondary_address,
                                        city: FFaker::AddressUS.city,
