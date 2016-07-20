@@ -30,7 +30,6 @@ module Addressable
   #            city: "Springfield", state: "MA", zip: "21111", country_code: "US" }
   def full_address=(address)
     new_address = StreetAddress::US.parse(address)
-    self.full_address = address
     self.street_address = "#{new_address.number} #{new_address.street} #{new_address.street_type}"
     self.city = new_address.city
     self.state = new_address.state

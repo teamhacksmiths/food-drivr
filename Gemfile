@@ -24,7 +24,6 @@ gem 'rack-cors'
 
 # Geocode locations
 gem 'geocoder', '>= 1.3.4'
-gem 'StreetAddress', :require => "street_address"
 gem 'mime-types', '>=2.99.1'
 
 # Handles database seeding in migration form

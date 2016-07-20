@@ -40,7 +40,7 @@ class Api::V1::UsersController < ApplicationController
   # We need to make sure to safeguard against bad params in the model layer
   def update
     if current_user.update(user_params)
-        render json: current_user, serializer: UserSerializer, status: 200, location: [:api_v1, current_user]
+      render json: current_user, serializer: UserSerializer, status: 200, location: [:api_v1, current_user]
     else
       render json: { errors: current_user.errors }, status: 422
     end
