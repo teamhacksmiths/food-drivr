@@ -51,7 +51,6 @@ class User < ActiveRecord::Base
     end while self.class.exists?(auth_token: auth_token)
   end
 
-  # Called on before
   def set_defaults
     match_type_to_role
     set_default_settings
@@ -94,7 +93,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Upadte the password with a new password
+  # Update the password with a new password
     # @param params a hash containing the submitted database
     # @param *options - an array of optional options.
     # @return result - The result of the transaction for updating the password.

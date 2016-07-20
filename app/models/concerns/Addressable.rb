@@ -1,5 +1,5 @@
 require 'active_support/concern'
-require 'StreetAddress'
+
 # Creates a module for parsing street addresses from an address string.
 #
 module Addressable
