@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_one :setting, autosave: true, dependent: :destroy
   accepts_nested_attributes_for :setting
   accepts_nested_attributes_for :organization
+  has_many :addresses, foreign_key: "user_id", class_name: "DonorAddress"
+  accepts_nested_attributes_for :addresses
 
   before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
@@ -49,7 +51,6 @@ class User < ActiveRecord::Base
     end while self.class.exists?(auth_token: auth_token)
   end
 
-  # Called on before
   def set_defaults
     match_type_to_role
     set_default_settings
@@ -65,7 +66,6 @@ class User < ActiveRecord::Base
     end
   end
 
-
   # Match the type of user to role and visa versa, providing backwords compatibility
   def match_type_to_role
     if self.role != nil || self.role_id != nil
@@ -80,7 +80,23 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Returns the first of addresses where default is true
+  # @param None
+  # @return Either the first default address or the first address if there is
+    # No default address
+  def default_address
+    default_addresses = self.addresses.where(default: true)
+    if default_addresses.count == 0
+      self.addresses.first
+    else
+      default_addresses.first
+    end
+  end
 
+  # Update the password with a new password
+    # @param params a hash containing the submitted database
+    # @param *options - an array of optional options.
+    # @return result - The result of the transaction for updating the password.
   def update_password_with_password(params, *options)
     current_password = params.delete(:current_password)
     result =  if valid_password? current_password

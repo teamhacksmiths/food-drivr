@@ -2,9 +2,8 @@ AdminUser.create!(email: 'admin@example.com',
                   password: 'password',
                   password_confirmation: 'password')
 
-
 # Dummy donor user
-User.create!(name: 'Donor User',
+Donor.create!(name: 'Donor User',
              email: 'donor@hacksmiths.com',
              password: 'password',
              password_confirmation: 'password',
@@ -14,9 +13,8 @@ User.create!(name: 'Donor User',
              phone: '+1 123 456 789',
              role_id: 0)
 
-
 # Dummy driver user
-User.create!(name: 'Driver User',
+Driver.create!(name: 'Driver User',
              email: 'driver@hacksmiths.com',
              password: 'password',
              company: 'Hacksmiths',
@@ -27,7 +25,7 @@ User.create!(name: 'Driver User',
              role_id: 1)
 
 # Dummy other user
-User.create!(name: 'Other User',
+Other.create!(name: 'Other User',
              email: 'other@hacksmiths.com',
              password: 'password',
              company: 'Hacksmiths',
@@ -60,7 +58,7 @@ donors = Donor.all
 
 # Create addresses for the donor
 donors.each do |donor|
-  donor.addresses << DonorAddress.create(donor_id: donor.id,
+  donor.addresses << DonorAddress.create(user_id: donor.id,
                                          street_address: FFaker::AddressUS.street_address,
                                          street_address_two: FFaker::AddressUS.secondary_address,
                                          city: FFaker::AddressUS.city,
@@ -68,7 +66,7 @@ donors.each do |donor|
                                          zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
                                          default: true)
 
- donor.addresses << DonorAddress.create(donor_id: donor.id,
+ donor.addresses << DonorAddress.create(user_id: donor.id,
                                         street_address: FFaker::AddressUS.street_address,
                                         street_address_two: FFaker::AddressUS.secondary_address,
                                         city: FFaker::AddressUS.city,
@@ -76,7 +74,7 @@ donors.each do |donor|
                                         zip: FFaker::AddressUS.zip_code.split('-')[0].to_s,
                                         default: false)
 
-donor.addresses << DonorAddress.create(donor_id: donor.id,
+donor.addresses << DonorAddress.create(user_id: donor.id,
                                        street_address: FFaker::AddressUS.street_address,
                                        street_address_two: FFaker::AddressUS.secondary_address,
                                        city: FFaker::AddressUS.city,
