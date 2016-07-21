@@ -1,6 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :phone, :name, :company, :email, :avatar, :role_id, :type, :settings, :addresses
-
+  type "user"
+  
   def settings
     custom_settings = {}
     unless object.setting == nil
