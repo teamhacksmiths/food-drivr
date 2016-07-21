@@ -7,7 +7,7 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
     @user_donations = current_user.donations.all
     @all_donations = @pending_donations + @user_donations
     render json: {
-        donations: ActiveModel::ArraySerializer.new(@all_donations, each_serializer: DonationSerializer, root: false)
+        donations: ActiveModel::Serializer::CollectionSerializer.new(@all_donations, each_serializer: DonationSerializer, root: false)
       }
   end
 
@@ -63,7 +63,7 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
     @pending_donations = Donation.where(status_id: 0)
 
     render json:{
-        donations: ActiveModel::ArraySerializer.new(@pending_donations,
+        donations: ActiveModel::Serializer::CollectionSerializer.new(@pending_donations,
                                                     each_serializer: DonationSerializer,
                                                     root: false)
       }, status: 200
@@ -73,7 +73,7 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
     @donations = current_user.donations.all
     @accepted_donations = @donations.where(status_id: 1)
     render json: {
-        donations: ActiveModel::ArraySerializer.new(@accepted_donations,
+        donations: ActiveModel::Serializer::CollectionSerializer.new(@accepted_donations,
                                                     each_serializer: DonationSerializer,
                                                     root: false)
       }, status: 200
@@ -83,7 +83,7 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
     @donations = current_user.donations.all
     @completed_donations = @donations.where(status_id: 2)
     render json: {
-        donations: ActiveModel::ArraySerializer.new(@completed_donations,
+        donations: ActiveModel::Serializer::CollectionSerializer.new(@completed_donations,
                                                     each_serializer: DonationSerializer,
                                                     root: false)
       }, status: 200
@@ -93,7 +93,7 @@ class Api::V1::Driver::DriverDonationsController < ApplicationController
     @donations = current_user.donations.all
     @cancelled_donations = @donations.where(status_id: 3)
     render json: {
-      donations: ActiveModel::ArraySerializer.new(@cancelled_donations,
+      donations: ActiveModel::Serializer::CollectionSerializer.new(@cancelled_donations,
                                                   each_serializer: DonationSerializer,
                                                   root: false)
     }

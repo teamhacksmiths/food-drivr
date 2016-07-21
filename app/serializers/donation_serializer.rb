@@ -1,4 +1,5 @@
 class DonationSerializer < ActiveModel::Serializer
+  type "donation"
   attributes :id, :note, :created_at, :updated_at, :status_id, :status, :participants
   has_one :pickup
   has_one :dropoff
