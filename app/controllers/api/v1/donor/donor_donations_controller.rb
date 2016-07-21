@@ -5,7 +5,7 @@ class Api::V1::Donor::DonorDonationsController < ApplicationController
   def index
     @user_donations = current_user.donations.all
     render json: {
-      donations: ActiveModel::ArraySerializer.new(@user_donations,
+      donations: ActiveModel::Serializer::CollectionSerializer.new(@user_donations,
                                                   each_serializer: DonationSerializer,
                                                   root: false)
     }
