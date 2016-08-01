@@ -37,7 +37,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   # Update will update a user with the params passed in.
-  # We need to make sure to safeguard against bad params in the model layer
+  # if the user has addresses, just totally delete and overwrite them.
   def update
     if current_user && current_user.addresses.length
       current_user.addresses.map(&:destroy)
