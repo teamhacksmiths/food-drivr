@@ -39,6 +39,9 @@ class Api::V1::UsersController < ApplicationController
   # Update will update a user with the params passed in.
   # We need to make sure to safeguard against bad params in the model layer
   def update
+    if current_user && current_user.addresses.length
+      current_user.addresses.map(&:destroy)
+    end
     if current_user.update(user_params)
       render json: current_user, serializer: UserSerializer, status: 200, location: [:api_v1, current_user]
     else
