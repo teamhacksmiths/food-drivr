@@ -184,4 +184,5 @@ donations.each do |donation|
 
   # Finally, once all fields are set, save the donation
   donation.save
+  sleep 0.5
 end

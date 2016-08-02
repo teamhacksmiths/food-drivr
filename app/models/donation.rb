@@ -1,23 +1,16 @@
 class Donation < ActiveRecord::Base
   before_validation :set_default_values
-
   belongs_to :donor, :class_name => "Donor", :foreign_key => "donor_id"
   belongs_to :driver, :class_name => "Driver", :foreign_key => "driver_id"
   belongs_to :recipient
-
   has_one :donation_metum
-
   belongs_to :status, :class_name => "DonationStatus"
   has_one :pickup
   has_one :dropoff
-
   has_many :types
   has_many :donation_types, through: :types
-
   has_many :items, :class_name => "DonationItem", :foreign_key => "donation_id"
-
   has_many :images, :class_name => "DonationImage"
-
   accepts_nested_attributes_for :items
 
   def self.most_recent
@@ -65,25 +58,25 @@ class Donation < ActiveRecord::Base
     end
 
     def set_default_status
-      if !self.status
+      unless self.status
         self.status ||= DonationStatus.find(0)
       end
     end
 
     def create_pickup
-      if !self.pickup
+      unless self.pickup
         self.pickup = Pickup.create
       end
     end
 
     def create_dropoff
-      if !self.dropoff
+      unless self.dropoff
         self.dropoff = Dropoff.create
       end
     end
 
     def create_donation_metum
-      if !self.donation_metum
+      unless self.donation_metum
         self.donation_metum = DonationMetum.create
       end
     end
