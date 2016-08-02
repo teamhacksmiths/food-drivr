@@ -119,7 +119,7 @@ types = DonationType.all
 end
 
 ## Create pending donations
-20.times do |n|
+5.times do |n|
   Donation.create!(donor: donors.sample,
                    recipient: recipients.sample,
                    note: FFaker::HipsterIpsum.phrase,
@@ -184,5 +184,5 @@ donations.each do |donation|
 
   # Finally, once all fields are set, save the donation
   donation.save
-  sleep 0.5
+  sleep 1
 end
