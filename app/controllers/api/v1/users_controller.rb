@@ -32,7 +32,7 @@ class Api::V1::UsersController < ApplicationController
       sign_in current_user, :bypass => true
       head 204
     else
-      render json: { errors: current_user.erros }, status: 422
+      render json: { errors: current_user.errors }, status: 422
     end
   end
 
