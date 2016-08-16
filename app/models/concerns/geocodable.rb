@@ -31,7 +31,7 @@ module Geocodable
     # Map the reverse geocoded results back from the geocoder to object.
     reverse_geocoded_by :latitude, :longitude do |obj,results|
       if geo = results.first
-        obj.street_address = geo.street_address
+        obj.street_address = geo.street_address || geo.address
         obj.city    = geo.city
         obj.state = geo.state
         obj.zip = geo.postal_code
