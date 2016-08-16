@@ -128,18 +128,17 @@ pending = DonationStatus.first
 types = DonationType.all
 
 
-20.times do |n|
+20.times do
   Donation.create!(donor: donors.sample,
                    driver: drivers.sample,
                    recipient: recipients.sample,
                    note: FFaker::HipsterIpsum.phrase,
                    description: FFaker::HipsterIpsum.phrase,
                    status: statuses.sample)
-
 end
 
 ## Create pending donations
-5.times do |n|
+5.times do
   Donation.create!(donor: donors.sample,
                    recipient: recipients.sample,
                    note: FFaker::HipsterIpsum.phrase,
