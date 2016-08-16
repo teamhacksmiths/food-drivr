@@ -24,6 +24,26 @@ Driver.create!(name: 'Driver User',
              phone: '+1 123 456 789',
              role_id: 1)
 
+ Driver.create!(name: 'Mikael Mukhsikaroyan',
+              email: 'mikael@hacksmiths.com',
+              password: 'password',
+              company: 'Hacksmiths',
+              password_confirmation: 'password',
+              description: 'An dummy mikael user',
+              expiration: Time.now + 20.years,
+              phone: '+1 123 456 789',
+              role_id: 1)
+
+Driver.create!(name: 'Ryan Collins',
+             email: 'ryan@hacksmiths.com',
+             password: 'password',
+             company: 'Hacksmiths',
+             password_confirmation: 'password',
+             description: 'An dummy ryan user',
+             expiration: Time.now + 20.years,
+             phone: '+1 123 456 789',
+             role_id: 1)
+
 # Dummy other user
 Other.create!(name: 'Other User',
              email: 'other@hacksmiths.com',
@@ -119,7 +139,7 @@ types = DonationType.all
 end
 
 ## Create pending donations
-20.times do |n|
+5.times do |n|
   Donation.create!(donor: donors.sample,
                    recipient: recipients.sample,
                    note: FFaker::HipsterIpsum.phrase,
@@ -183,5 +203,7 @@ donations.each do |donation|
                               zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
 
   # Finally, once all fields are set, save the donation
+  donation.pickup.save
+  donation.dropoff.save
   donation.save
 end
