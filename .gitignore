@@ -22,3 +22,4 @@ config/local_env.yml
 
 .idea
 .rspec
+/vendor/cache
