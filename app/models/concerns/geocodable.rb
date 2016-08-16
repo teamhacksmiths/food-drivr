@@ -29,13 +29,13 @@ module Geocodable
     after_validation :geocode, :if => :address_changed?
     after_validation :reverse_geocode, :if => :location_changed?
     # Map the reverse geocoded results back from the geocoder to object.
-    reverse_geocoded_by :latitude, :longitude do |obj,results|
+    reverse_geocoded_by :latitude, :longitude do |obj, results|
       if geo = results.first
-        obj.street_address = geo.street_address || geo.address
+        obj.street_address = geo.address
         obj.city    = geo.city
         obj.state = geo.state
         obj.zip = geo.postal_code
-        obj.country_code = geo.country_code || "+1"
+        obj.country_code = "+1"
       end
     end
   end
