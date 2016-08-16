@@ -1,5 +1,5 @@
 FROM ruby:2.2.4
-MAINTAINER marko@codeship.com
+MAINTAINER admin@ryancollins.io
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
@@ -19,7 +19,7 @@ WORKDIR /app
 # will be cached unless changes to one of those two files
 # are made.
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install --jobs 20 --retry 5
+RUN gem install bundler && bundle install --path vendor/cache --jobs 20 --retry 5
 
 # Copy the main application.
 COPY . ./
