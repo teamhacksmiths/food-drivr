@@ -24,6 +24,26 @@ Driver.create!(name: 'Driver User',
              phone: '+1 123 456 789',
              role_id: 1)
 
+ Driver.create!(name: 'Mikael Mukhsikaroyan',
+              email: 'mikael@hacksmiths.com',
+              password: 'password',
+              company: 'Hacksmiths',
+              password_confirmation: 'password',
+              description: 'An dummy mikael user',
+              expiration: Time.now + 20.years,
+              phone: '+1 123 456 789',
+              role_id: 1)
+
+Driver.create!(name: 'Ryan Collins',
+             email: 'ryan@hacksmiths.com',
+             password: 'password',
+             company: 'Hacksmiths',
+             password_confirmation: 'password',
+             description: 'An dummy ryan user',
+             expiration: Time.now + 20.years,
+             phone: '+1 123 456 789',
+             role_id: 1)
+
 # Dummy other user
 Other.create!(name: 'Other User',
              email: 'other@hacksmiths.com',
@@ -184,5 +204,4 @@ donations.each do |donation|
 
   # Finally, once all fields are set, save the donation
   donation.save
-  sleep 1
 end
