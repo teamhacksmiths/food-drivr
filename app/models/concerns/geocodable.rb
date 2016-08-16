@@ -35,7 +35,7 @@ module Geocodable
         obj.city    = geo.city
         obj.state = geo.state
         obj.zip = geo.postal_code
-        obj.country_code = geo.country_code
+        obj.country_code = geo.country_code || "+1"
       end
     end
   end
