@@ -203,5 +203,7 @@ donations.each do |donation|
                               zip: FFaker::AddressUS.zip_code.split('-')[0].to_s )
 
   # Finally, once all fields are set, save the donation
+  donation.pickup.save
+  donation.dropoff.save
   donation.save
 end
