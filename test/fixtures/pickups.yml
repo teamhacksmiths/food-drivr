@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  estimated: 2016-04-03 01:20:18
+  actual: 2016-04-03 01:20:18
+
+two:
+  estimated: 2016-04-03 01:20:18
+  actual: 2016-04-03 01:20:18
