@@ -3,7 +3,7 @@ FactoryGirl.define do
     d.donor Donor.all.sample
     d.driver Driver.all.sample
     d.recipient Recipient.all.sample
-    d.note 'Blah, blah, blah, blah, blah'
+    d.note 'Blah, blah, blah, blah, blah' # Create fake note
     d.items { |item| [item.association(:donation_item)] }
   end
 end
