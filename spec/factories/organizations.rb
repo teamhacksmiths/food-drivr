@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :donation do
+  factory :organization do
     
   end
 end
