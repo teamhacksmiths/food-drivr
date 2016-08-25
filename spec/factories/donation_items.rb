@@ -1,7 +1,10 @@
+require 'ffaker'
+
 FactoryGirl.define do
   factory :donation_item do
-    description "MyString"
-    quanity 1
-    unit "MyString"
+    donation nil
+    description FFaker::Food.meat
+    quantity FFaker::UnitEnglish.mass_abbr
+    unit [*1..20].sample
   end
 end
