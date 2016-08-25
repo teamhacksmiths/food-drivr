@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
   include Devise::Mailers::Helpers
 
-  default from: "default@mydomain.com"
+  default from: "default@fooddrivr.com"
 
   def confirmation_instructions(record)
     devise_mail(record, :confirmation_instructions)
