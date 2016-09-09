@@ -1,3 +1,4 @@
+![CodeShip](https://codeship.com/projects/82a23e20-5902-0134-0e4b-3ee926b7dc7a/status?branch=master)
 ![Hacksmiths Logo](https://rawgit.com/teamhacksmiths/food-drivr-backend/master/.github/assets/hacksmiths-logo.png)
 
 # Food Drivr - Made with ❤️ by [Hacksmiths](http://hacksmiths.io)
